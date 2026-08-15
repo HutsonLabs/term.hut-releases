@@ -94,7 +94,7 @@
     .term {
       margin: 3rem 0 0; background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; overflow: hidden;
-      font-family: var(--font-sans);
+      font-family: var(--font-mono);
       box-shadow: 0 24px 60px hsla(240, 23%, 4%, 0.55);
     }
     .term-bar {
@@ -119,8 +119,8 @@
     /* ---- sections ---- */
     section { padding: 3rem 0; }
     h2 {
-      font-size: 1.05rem; font-weight: 600; color: var(--prompt);
-      margin-bottom: 1.6rem; letter-spacing: 0.02em;
+      font-size: 1.25rem; font-weight: 600; color: var(--prompt);
+      margin-top: 1rem; margin-bottom: 1.6rem; letter-spacing: 0.02em;
     }
     h2::before { content: "# "; color: var(--ctp-overlay0); }
 
@@ -129,7 +129,7 @@
       background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
       padding: 1.3rem 1.3rem 1.4rem;
     }
-    .claim h3 { font-size: 0.98rem; margin-bottom: 0.6rem; color: var(--ctp-lavender); }
+    .claim h3 { font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--ctp-lavender); }
     .claim p { font-size: 0.9rem; color: var(--subtext); }
     .claim p code, .note code {
       background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
@@ -158,7 +158,7 @@
       position: absolute; top: 0.45rem; right: 0.45rem;
       background: var(--surface); color: var(--ctp-subtext0);
       border: 1px solid var(--ctp-surface2); border-radius: 6px;
-      font: var(--font-mono); font-size: 0.72rem; padding: 0.15rem 0.5rem; cursor: pointer;
+      font-family: var(--font-mono); font-size: 0.72rem; padding: 0.15rem 0.5rem; cursor: pointer;
     }
     .copy:hover { color: var(--ctp-rosewater); border-color: var(--ctp-overlay0); }
 
