@@ -39,7 +39,7 @@
       --subtext: var(--ctp-subtext1);
       --accent: var(--ctp-mauve);
       --prompt: var(--ctp-peach);
-
+      --font-sans: "Avenir Next", "Segue UI", sans-serif;
       --font-mono: "Maple Mono NF", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
     }
 
@@ -54,7 +54,7 @@
     body {
       background: var(--ctp-crust);
       color: var(--text);
-      font-family: var(--font-mono);
+      font-family: var(--font-sans);
       font-size: 15px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
@@ -94,6 +94,7 @@
     .term {
       margin: 3rem 0 0; background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; overflow: hidden;
+      font-family: var(--font-sans);
       box-shadow: 0 24px 60px hsla(240, 23%, 4%, 0.55);
     }
     .term-bar {
@@ -151,13 +152,13 @@
       padding: 0.8rem 0.9rem; font-size: 0.8rem; line-height: 1.6;
       overflow-x: auto; position: relative;
     }
-    pre code { font-family: inherit; color: var(--ctp-subtext0); }
+    pre code { font-family: var(--font-mono); color: var(--ctp-subtext0); }
     pre .p { color: var(--prompt); user-select: none; }
     .copy {
       position: absolute; top: 0.45rem; right: 0.45rem;
       background: var(--surface); color: var(--ctp-subtext0);
       border: 1px solid var(--ctp-surface2); border-radius: 6px;
-      font: inherit; font-size: 0.72rem; padding: 0.15rem 0.5rem; cursor: pointer;
+      font: var(--font-mono); font-size: 0.72rem; padding: 0.15rem 0.5rem; cursor: pointer;
     }
     .copy:hover { color: var(--ctp-rosewater); border-color: var(--ctp-overlay0); }
 
