@@ -1,0 +1,9 @@
+#!/bin/sh
+# Deterministically strip Claude attribution trailers from every commit
+# message, no matter how the commit was created (-m, -F, editor, amend).
+# Activate with: git config core.hooksPath .githooks
+msg="$1"
+tmp="$msg.strip-attribution"
+grep -viE '^(co-authored-by:.*claude|claude-session:)' "$msg" > "$tmp" || true
+mv "$tmp" "$msg"
+exit 0
