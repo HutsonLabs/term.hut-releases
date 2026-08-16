@@ -3,276 +3,249 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>term.hut</title>
+  <meta name="color-scheme" content="dark">
+  <title>term.hut — a calming workspace</title>
   <meta name="description" content="term.hut — a local, agent-aware terminal for macOS. PTY shell, file tree, LSP editor, and a Claude Code chat panel in one window, local or over SSH.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' width='64' height='64'%3E%3Crect x='2' y='2' width='60' height='60' rx='13' fill='hsl(45, 7%25, 10%25)'/%3E%3Cg fill='none' stroke='hsl(17, 63%25, 61%25)' stroke-width='5.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20,20 34,32 20,44'/%3E%3Cline x1='38' y1='43.5' x2='48' y2='43.5'/%3E%3C/g%3E%3C/svg%3E">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icon-full.svg">
+  <link rel="stylesheet" href="styles.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="term.hut — a local, agent-aware terminal">
+  <meta property="og:description" content="Terminal, file tree, LSP editor and Claude share state in one window. Sessions run behind a FIFO on the host that owns them, so closing the app detaches instead of killing them.">
+  <meta property="og:url" content="https://termhut.hutsonlabs.com/">
+  <meta property="og:image" content="https://termhut.hutsonlabs.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <style>
-    /* Catppuccin Mocha — the same token set the app authors in ui/index.html.
-       Dark-only, like the app. */
-    :root {
-      --ctp-rosewater: hsl(10, 56%, 91%);
-      --ctp-mauve: hsl(267, 84%, 81%);
-      --ctp-red: hsl(343, 81%, 75%);
-      --ctp-peach: hsl(23, 92%, 75%);
-      --ctp-yellow: hsl(41, 86%, 83%);
-      --ctp-green: hsl(115, 54%, 76%);
-      --ctp-teal: hsl(170, 57%, 73%);
-      --ctp-blue: hsl(217, 92%, 76%);
-      --ctp-lavender: hsl(232, 97%, 85%);
-      --ctp-text: hsl(226, 64%, 88%);
-      --ctp-subtext1: hsl(227, 35%, 80%);
-      --ctp-subtext0: hsl(228, 24%, 72%);
-      --ctp-overlay1: hsl(230, 13%, 55%);
-      --ctp-overlay0: hsl(231, 11%, 47%);
-      --ctp-surface2: hsl(233, 12%, 39%);
-      --ctp-surface1: hsl(234, 13%, 31%);
-      --ctp-surface0: hsl(237, 16%, 23%);
-      --ctp-base: hsl(240, 21%, 15%);
-      --ctp-mantle: hsl(240, 21%, 12%);
-      --ctp-crust: hsl(240, 23%, 9%);
-
-      --bg: var(--ctp-base);
-      --bg-alt: var(--ctp-mantle);
-      --surface: var(--ctp-surface0);
-      --border: var(--ctp-surface1);
-      --text: var(--ctp-text);
-      --subtext: var(--ctp-subtext1);
-      --accent: var(--ctp-mauve);
-      --prompt: var(--ctp-peach);
-      --font-sans: "Avenir Next", "Segue UI", sans-serif;
-      --font-mono: "Maple Mono NF", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-    }
-
-    * { box-sizing: border-box; margin: 0; }
+    /* Page layout only. Every value is a design-system token; anything reusable
+       lives in styles.css, which is generated verbatim from site/design. */
+    *, *::before, *::after { box-sizing: border-box; }
+    body, h1, h2, h3, p, ul, figure { margin: 0; }
 
     html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .cursor { animation: none !important; }
-    }
-
     body {
-      background: var(--ctp-crust);
-      color: var(--text);
-      font-family: var(--font-sans);
-      font-size: 15px;
-      line-height: 1.65;
+      min-height: 100vh;
+      background: var(--grad-ground) no-repeat;
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-size: var(--body);
+      line-height: var(--body-lh);
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: var(--ctp-lavender); text-decoration-color: var(--ctp-overlay0); text-underline-offset: 3px; }
-    a:hover { color: var(--ctp-rosewater); }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+    .wrap { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 var(--page-pad); }
 
-    .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.25rem; }
+    main { display: flex; flex-direction: column; gap: var(--rhythm-section); padding-bottom: var(--rhythm-section); }
 
-    /* ---- hero ---- */
-    header { padding: 4.5rem 0 3rem; }
-    .mark { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.6rem; }
-    .mark svg { width: 52px; height: 52px; flex: none; }
-    .mark h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; }
-    .mark h1 .dot { color: var(--prompt); }
-
-    .tagline { font-size: 1.35rem; font-weight: 600; max-width: 36rem; }
-    .tagline em { font-style: normal; color: var(--prompt); }
-    .sub { color: var(--subtext); max-width: 40rem; margin-top: 0.9rem; }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.8rem; align-items: center; }
-    .btn {
-      display: inline-block; padding: 0.55rem 1.1rem; border-radius: 8px;
-      font: inherit; font-weight: 600; text-decoration: none; cursor: pointer;
-      border: 1px solid var(--border);
+    /* ---- hero — gradient B, once per site ---- */
+    .hero { background: var(--grad-bloom); padding: var(--rhythm-hero) 0 var(--s-16); }
+    .hero .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-6); }
+    /* Mark and wordmark on one row; the wordmark's line box is the tile's own height. */
+    .mark { display: flex; align-items: center; gap: var(--s-3); }
+    .mark img { display: block; width: 56px; height: 56px; flex: none; }
+    .mark span {
+      font-size: var(--display-l); line-height: 56px; font-weight: var(--weight-strong);
+      letter-spacing: var(--display-l-ls);
     }
-    .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--ctp-crust); }
-    .btn-primary:hover { background: var(--ctp-lavender); border-color: var(--ctp-lavender); color: var(--ctp-crust); }
-    .btn-ghost { background: transparent; color: var(--text); }
-    .btn-ghost:hover { border-color: var(--ctp-overlay0); color: var(--ctp-rosewater); }
-    .ver { color: var(--ctp-overlay1); font-size: 0.85rem; }
-    .ver a { color: inherit; }
-
-    /* ---- terminal vignette ---- */
-    .term {
-      margin: 3rem 0 0; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 10px; overflow: hidden;
-      font-family: var(--font-mono);
-      box-shadow: 0 24px 60px hsla(240, 23%, 4%, 0.55);
+    .hero h1 {
+      font-size: clamp(var(--display-xl-mobile), 7vw, var(--display-xl));
+      line-height: var(--display-xl-lh); letter-spacing: var(--display-xl-ls);
+      font-weight: var(--weight-strong); max-width: 18ch;
     }
-    .term-bar {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: var(--bg-alt); border-bottom: 1px solid var(--border);
-      padding: 0.55rem 0.8rem; font-size: 0.8rem; color: var(--ctp-overlay1);
-    }
-    .term-bar .lights { display: flex; gap: 6px; margin-right: 0.4rem; }
-    .term-bar .lights i { width: 11px; height: 11px; border-radius: 50%; background: var(--ctp-surface2); }
-    .term-body { padding: 1.1rem 1.2rem 1.3rem; font-size: 0.88rem; line-height: 1.8; overflow-x: auto; }
-    .term-body .c  { color: var(--ctp-overlay1); }   /* comment */
-    .term-body .p  { color: var(--prompt); }         /* prompt */
-    .term-body .g  { color: var(--ctp-green); }
-    .term-body .t  { color: var(--ctp-teal); }
-    .term-body .m  { color: var(--ctp-mauve); }
-    .cursor {
-      display: inline-block; width: 0.55em; height: 1.05em; vertical-align: text-bottom;
-      background: var(--prompt); animation: blink 1.1s steps(1) infinite;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
+    .lead { font-size: var(--body-lead); line-height: var(--body-lead-lh); color: var(--ink-muted); max-width: var(--measure-lead); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+    .row--tight { gap: var(--s-2); }
 
     /* ---- sections ---- */
-    section { padding: 3rem 0; }
-    h2 {
-      font-size: 1.25rem; font-weight: 600; color: var(--prompt);
-      margin-top: 1rem; margin-bottom: 1.6rem; letter-spacing: 0.02em;
+    section { display: flex; flex-direction: column; gap: var(--s-6); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items: start; }
+    /* Long commands scroll inside their own block instead of widening the column. */
+    .grid-3 > *, .grid-2 > * { min-width: 0; }
+    .stack { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+    .note-list {
+      margin: 0; padding-left: 18px; font-size: var(--body-s); line-height: 1.7;
+      color: var(--ink-muted); display: flex; flex-direction: column; gap: 6px;
     }
-    h2::before { content: "# "; color: var(--ctp-overlay0); }
+    .card-actions { margin-top: auto; padding-top: var(--s-1); }
 
-    .claims { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
-    .claim {
-      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
-      padding: 1.3rem 1.3rem 1.4rem;
-    }
-    .claim h3 { font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--ctp-lavender); }
-    .claim p { font-size: 0.9rem; color: var(--subtext); }
-    .claim p code, .note code {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
-      padding: 0.05em 0.35em; font-size: 0.92em; color: var(--ctp-rosewater);
-    }
+    /* A block cursor, not a blinking one: nothing on this page loops. */
+    .cursor { display: inline-block; width: 0.55em; height: 1.05em; vertical-align: text-bottom; background: var(--accent); }
 
-    .note { color: var(--ctp-overlay1); font-size: 0.88rem; margin-top: 1.4rem; max-width: 44rem; }
-
-    /* ---- downloads ---- */
-    .dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; }
-    .card {
-      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
-      padding: 1.3rem; display: flex; flex-direction: column; gap: 0.75rem;
+    /* ---- responsive — the phone is the default, not the fallback ---- */
+    @media (max-width: 1199px) { .wrap { padding: 0 var(--page-pad-md); } .thut-header, .thut-footer { padding-left: var(--page-pad-md); padding-right: var(--page-pad-md); } }
+    @media (max-width: 1023px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 767px) {
+      .wrap { padding: 0 var(--page-pad-sm); }
+      .thut-header, .thut-footer { padding-left: var(--page-pad-sm); padding-right: var(--page-pad-sm); }
+      .thut-header { height: var(--header-h-mobile); }
+      .thut-header__nav { display: none; }
+      main { gap: var(--rhythm-section-mobile); padding-bottom: var(--rhythm-section-mobile); }
+      .hero { padding: var(--s-16) 0 var(--s-10); }
+      .mark img { width: 40px; height: 40px; }
+      .mark span { font-size: var(--display-l-mobile); line-height: 40px; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .thut-sechead__note { display: none; }
     }
-    .card h3 { font-size: 0.98rem; }
-    .card h3 small { color: var(--ctp-overlay1); font-weight: 400; font-size: 0.82rem; display: block; margin-top: 0.15rem; }
-    .card .spacer { flex: 1; }
-    pre {
-      background: var(--bg-alt); border: 1px solid var(--border); border-radius: 8px;
-      padding: 0.8rem 0.9rem; font-size: 0.8rem; line-height: 1.6;
-      overflow-x: auto; position: relative;
-    }
-    pre code { font-family: var(--font-mono); color: var(--ctp-subtext0); }
-    pre .p { color: var(--prompt); user-select: none; }
-    .copy {
-      position: absolute; top: 0.45rem; right: 0.45rem;
-      background: var(--surface); color: var(--ctp-subtext0);
-      border: 1px solid var(--ctp-surface2); border-radius: 6px;
-      font-family: var(--font-mono); font-size: 0.72rem; padding: 0.15rem 0.5rem; cursor: pointer;
-    }
-    .copy:hover { color: var(--ctp-rosewater); border-color: var(--ctp-overlay0); }
-
-    /* ---- footer ---- */
-    footer {
-      border-top: 1px solid var(--border); margin-top: 2rem;
-      padding: 2rem 0 3rem; color: var(--ctp-overlay1); font-size: 0.85rem;
-    }
-    footer .wrap { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between; }
   </style>
 </head>
 <body>
-
-<header class="wrap">
-  <div class="mark">
-    <svg viewBox="0 0 64 64" role="img" aria-label="term.hut icon">
-      <rect x="2" y="2" width="60" height="60" rx="13" fill="hsl(45, 7%, 10%)"/>
-      <g fill="none" stroke="hsl(17, 63%, 61%)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20,20 34,32 20,44"/>
-        <line x1="38" y1="43.5" x2="48" y2="43.5"/>
-      </g>
-    </svg>
-    <h1>term<span class="dot">.</span>hut</h1>
-  </div>
-
-  <p class="tagline">A local, <em>agent-aware</em> terminal for macOS.</p>
-  <p class="sub">PTY shell, file tree, LSP-backed editor, and a Claude Code chat
-  panel in one window — working identically against a local directory or a
-  remote host over SSH.</p>
-
-  <div class="hero-actions">
-    <a class="btn btn-primary" id="dl-dmg"
-       href="https://github.com/HutsonLabs/term.hut-releases/releases/latest">Download for macOS</a>
-    <a class="btn btn-ghost" href="#install">Other platforms</a>
-    <span class="ver" id="ver"><a href="https://github.com/HutsonLabs/term.hut-releases/releases/latest">latest release</a> · Apple silicon · signed &amp; notarized</span>
-  </div>
-
-  <figure class="term" aria-label="Illustration: an agent session surviving an app restart">
-    <div class="term-bar"><span class="lights"><i></i><i></i><i></i></span>~/src/api — term.hut</div>
-    <div class="term-body"><pre style="all:unset; font:inherit; white-space:pre;"><span class="c"># Friday, at the desk</span>
-<span class="p">&gt;_</span> anchored <span class="t">~/src/api</span> · <span class="m">main</span> · claude session <span class="g">running</span>
-<span class="c"># … close the laptop. The session is not a child process — it keeps running.</span>
-
-<span class="c"># Monday, from another machine, over SSH</span>
-<span class="p">&gt;_</span> anchored <span class="t">~/src/api</span> · <span class="m">main</span> · <span class="g">re-attached</span> — replaying, then following
-<span class="p">&gt;_</span> <span class="cursor" aria-hidden="true"></span></pre></div>
-  </figure>
-</header>
-
-<main>
-  <section class="wrap" aria-labelledby="why">
-    <h2 id="why">why it exists</h2>
-    <div class="claims">
-      <div class="claim">
-        <h3>Detached agents that outlive the app</h3>
-        <p>Claude sessions are not child processes. They run <code>nohup</code>'d
-        behind a FIFO on whichever host owns them. Closing term.hut
-        <em>detaches</em>; reopening — or another device over SSH —
-        <em>re-attaches</em>, replaying the stream and then following it.
-        The app is a viewer, not the owner.</p>
-      </div>
-      <div class="claim">
-        <h3>Anchored workspaces</h3>
-        <p>An anchored directory binds its own Claude session, terminal, editor,
-        and git branch or worktree. Switching the anchor switches all of it at
-        once, local or remote.</p>
-      </div>
-      <div class="claim">
-        <h3>One surface</h3>
-        <p>Terminal, file tree, LSP-backed editor, and agent chat share state in
-        a single window rather than in juggled apps and panes.</p>
-      </div>
+<div class="hero">
+  <div class="wrap">
+    <div class="mark">
+      <img src="assets/favicon.svg" alt="" width="56" height="56">
+      <span>term.hut</span>
     </div>
-    <p class="note">Auth is inherited, never re-implemented: the spawned Claude
-    Code CLI reads its own keychain and <code>~/.claude</code> credentials, so
-    term.hut contains zero Anthropic auth code.</p>
+    <h1>A calm agentic workspace</h1>
+    <p class="lead">Terminal, files, code editor and chat share state in one
+    window — against a local directory or ssh. Sessions run behind a
+    FIFO on the host that owns them, so closing the app detaches instead of killing them.</p>
+
+    <div class="row">
+      <a class="thut-btn thut-btn--primary thut-btn--lg" id="dl-dmg"
+         href="https://github.com/HutsonLabs/term.hut-releases/releases/latest">Download for macOS<span class="thut-btn__meta" id="dl-dmg-meta">dmg · aarch64</span></a>
+      <a class="thut-btn thut-btn--secondary thut-btn--lg" href="#install">Other platforms</a>
+    </div>
+
+    <div class="row row--tight">
+      <span class="thut-badge" id="ver-badge"><a href="https://github.com/HutsonLabs/term.hut-releases/releases/latest" style="color:inherit;text-decoration:none">latest release</a></span>
+      <span class="thut-badge thut-badge--ok">signed &amp; notarized</span>
+      <span class="thut-badge thut-badge--warn">macOS 12+</span>
+      <span class="thut-badge thut-badge--remote">ssh</span>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="wrap" aria-label="Session transcript">
+    <div class="thut-code">
+      <div class="thut-code__bar"><span>session</span></div>
+      <pre class="thut-code__body"><span class="hl-cmt"># Friday, at the desk</span>
+<span class="thut-code__prompt">&gt;_</span> anchored <span style="color:var(--remote)">~/src/api</span> · <span style="color:var(--ctp-mauve)">main</span> · claude session <span style="color:var(--ok)">running</span>
+<span class="hl-cmt"># … close the laptop. The session is not a child process — it keeps running.</span>
+
+<span class="hl-cmt"># Monday, from another machine, over SSH</span>
+<span class="thut-code__prompt">&gt;_</span> anchored <span style="color:var(--remote)">~/src/api</span> · <span style="color:var(--ctp-mauve)">main</span> · <span style="color:var(--ok)">re-attached</span> — replaying, then following
+<span class="thut-code__prompt">&gt;_</span> <span class="cursor" aria-hidden="true"></span></pre>
+    </div>
   </section>
 
-  <section class="wrap" id="install" aria-labelledby="get">
-    <h2 id="get">get it</h2>
-    <div class="dl">
-      <div class="card">
-        <h3>macOS <small>Apple silicon · macOS 12+ · signed and notarized</small></h3>
-        <div class="spacer"></div>
-        <pre><code><span class="p">$</span> <span data-cmd>open term.hut_<span data-ver>&lt;version&gt;</span>_aarch64.dmg</span></code></pre>
-        <a class="btn btn-primary" id="dl-dmg-2"
-           href="https://github.com/HutsonLabs/term.hut-releases/releases/latest">Download .dmg</a>
+  <section class="wrap" id="why">
+    <div class="thut-sechead">
+      <span class="thut-sechead__num">01</span>
+      <h2 class="thut-sechead__title">Why it exists</h2>
+      <span class="thut-sechead__note">stated as mechanisms, not benefits</span>
+    </div>
+
+    <div class="grid-3">
+      <div class="thut-feature">
+        <span class="thut-feature__num">01</span>
+        <h3 class="thut-feature__title">Confusion</h3>
+        <p class="thut-feature__body">I kept getting confused when running multiple agents and repos: what was running where? I tried other apps, but they all had limitations that didn't work for me. I found I was using VSCodium the most, but it felt bloated. It inspired this app.</p>
       </div>
-      <div class="card">
-        <h3>Linux <small>amd64 · Debian 12+ / Ubuntu 22.04+</small></h3>
-        <div class="spacer"></div>
-        <pre><code><span class="p">$</span> <span data-cmd>curl -LO https://github.com/HutsonLabs/term.hut-releases/releases/latest/download/term.hut_<span data-ver>&lt;version&gt;</span>_amd64.deb
-sudo apt install ./term.hut_<span data-ver>&lt;version&gt;</span>_amd64.deb</span></code></pre>
-        <a class="btn btn-ghost" id="dl-deb"
-           href="https://github.com/HutsonLabs/term.hut-releases/releases/latest">Download .deb</a>
+      <div class="thut-feature">
+        <span class="thut-feature__num">02</span>
+        <h3 class="thut-feature__title">Curiosity</h3>
+        <p class="thut-feature__body">Could I design an app that met my criteria while also learning about Rust and Tauri? Could I keep it small, but useful? Could I use this for my business, personal, and technical amibition? I'm still trying to answer that question, but this is my start.</p>
       </div>
-      <div class="card">
-        <h3>Container <small>web mode — the browser terminal on :6767, no login needed to pull</small></h3>
-        <div class="spacer"></div>
-        <pre><code><span class="p">$</span> <span data-cmd>docker run --rm -p 6767:6767 ghcr.io/hutsonlabs/term.hut:latest</span></code></pre>
-        <a class="btn btn-ghost" href="https://github.com/HutsonLabs/term.hut-releases/pkgs/container/term.hut">ghcr.io/hutsonlabs/term.hut</a>
+      <div class="thut-feature">
+        <span class="thut-feature__num">03</span>
+        <h3 class="thut-feature__title">Claude</h3>
+        <p class="thut-feature__body">VSCodium paired Claude Code awesome harnesses. I wanted something smaller with only the stuff I found awesome or interesting. I try and keep it up to date with the latest from Claude Code to leverage any cool new stuff or avoid breaking anything.</p>
       </div>
     </div>
-    <p class="note">Every release ships the same version three ways. The
-    container image is built in the same CI run as the deb, from that exact deb,
-    so the three artifacts on a release are always the same build. The macOS app
-    updates itself in place after that.</p>
+
+    <div class="grid-2">
+      <div class="thut-callout thut-callout--info">
+        <span class="thut-callout__label">Reuse, not remake</span>
+        <p class="thut-callout__body">The build small by letting better tools do their thing. Also, <strong>term.hut</strong> works with Claude's subscription (important to me) and the same jsonl used with the .VSIX Anthropic release to reduce the likelihood of getting blocked.</p>
+      </div>
+      <div class="stack">
+        <span class="thut-eyebrow">What I won't do</span>
+        <ul class="note-list">
+          <li>Take your data. </li>
+          <li>Build for architectures I don't use.</li>
+          <li>Try to take over the world</li>
+        </ul>
+      </div>
+    </div>
   </section>
+
+  <section class="wrap" id="install">
+    <div class="thut-sechead">
+      <span class="thut-sechead__num">02</span>
+      <h2 class="thut-sechead__title">Try it if you'd like</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="thut-card">
+        <h3 class="thut-feature__title">macOS</h3>
+        <span class="thut-eyebrow">Apple Silicon · signed and notarized</span>
+        <div class="thut-code">
+          <div class="thut-code__bar"><span>zsh</span><button type="button" class="thut-code__copy">copy</button></div>
+          <pre class="thut-code__body"><span class="thut-code__prompt">$</span> <span data-cmd>open term.hut_<span data-ver>&lt;version&gt;</span>_aarch64.dmg</span></pre>
+        </div>
+        <div class="card-actions">
+          <a class="thut-btn thut-btn--secondary thut-btn--sm" id="dl-dmg-2"
+             href="https://github.com/HutsonLabs/term.hut-releases/releases/latest">Download .dmg</a>
+        </div>
+      </div>
+
+      <div class="thut-card">
+        <h3 class="thut-feature__title">Linux</h3>
+        <span class="thut-eyebrow">amd64 · Debian</span>
+        <div class="thut-code">
+          <div class="thut-code__bar"><span>zsh</span><button type="button" class="thut-code__copy">copy</button></div>
+          <pre class="thut-code__body"><span class="thut-code__prompt">$</span> <span data-cmd>curl -LO https://github.com/HutsonLabs/term.hut-releases/releases/latest/download/term.hut_<span data-ver>&lt;version&gt;</span>_amd64.deb &amp;&amp; sudo apt install ./term.hut_<span data-ver>&lt;version&gt;</span>_amd64.deb</span></pre>
+        </div>
+        <div class="card-actions">
+          <a class="thut-btn thut-btn--secondary thut-btn--sm" id="dl-deb"
+             href="https://github.com/HutsonLabs/term.hut-releases/releases/latest">Download .deb</a>
+        </div>
+      </div>
+
+      <div class="thut-card">
+        <h3 class="thut-feature__title">Container</h3>
+        <span class="thut-eyebrow">Selkies VNC · Web Mode</span>
+        <div class="thut-code">
+          <div class="thut-code__bar"><span>zsh</span><button type="button" class="thut-code__copy">copy</button></div>
+          <pre class="thut-code__body"><span class="thut-code__prompt">$</span> <span data-cmd>docker run --rm -p 6767:6767 ghcr.io/hutsonlabs/term.hut:latest</span></pre>
+        </div>
+        <div class="card-actions">
+          <a class="thut-btn thut-btn--secondary thut-btn--sm" href="https://github.com/HutsonLabs/term.hut-releases/pkgs/container/term.hut">Package on ghcr.io</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="thut-callout thut-callout--ok">
+      <span class="thut-callout__label">build</span>
+      <p class="thut-callout__body">Every release ships the same version three ways. Thecontainer image is built in the same CI run as the deb, from that exact deb, so the three artifacts on a release are always the same build. The macOS app updates itself in place after that.</p>
+    </div>
+  </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© HutsonLabs · term.hut</span>
-    <span><a href="https://github.com/HutsonLabs/term.hut-releases/releases">release assets on GitHub</a> · source lives in a private repo</span>
+<footer class="thut-footer">
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <img src="assets/favicon.svg" alt="" width="28" height="28" style="display:block">
+    <div class="thut-footer__meta">HutsonLabs<br>termhut.hutsonlabs.com</div>
+    <a class="thut-footer__repo" href="https://github.com/HutsonLabs/term.hut-releases">GitHub</a>
+  </div>
+  <div class="thut-footer__cols">
+    <div class="thut-footer__col">
+      <span class="thut-footer__head">Download</span>
+      <a class="thut-footer__link" href="#install">macOS dmg</a>
+      <a class="thut-footer__link" href="#install">Linux deb</a>
+      <a class="thut-footer__link" href="https://github.com/HutsonLabs/term.hut-releases/pkgs/container/term.hut">Container image</a>
+    </div>
+    <div class="thut-footer__col">
+      <span class="thut-footer__head">Project</span>
+      <a class="thut-footer__link" href="#why">Why it exists</a>
+      <a class="thut-footer__link" href="https://github.com/HutsonLabs/term.hut-releases/releases">Release assets</a>
+    </div>
   </div>
 </footer>
 
@@ -290,20 +263,21 @@ sudo apt install ./term.hut_<span data-ver>&lt;version&gt;</span>_amd64.deb</spa
       if (!ver) return;
       const asset = suffix => (rel.assets || []).find(a => a.name.endsWith(suffix));
       const dmg = asset(".dmg"), deb = asset(".deb");
-      if (dmg) for (const id of ["dl-dmg", "dl-dmg-2"]) document.getElementById(id).href = dmg.browser_download_url;
+      if (dmg) {
+        for (const id of ["dl-dmg", "dl-dmg-2"]) document.getElementById(id).href = dmg.browser_download_url;
+        if (dmg.size) document.getElementById("dl-dmg-meta").textContent =
+          (dmg.size / 1e6).toFixed(1) + " MB · dmg";
+      }
       if (deb) document.getElementById("dl-deb").href = deb.browser_download_url;
       document.querySelectorAll("[data-ver]").forEach(el => el.textContent = ver);
-      document.getElementById("ver").firstElementChild.textContent = rel.tag_name;
+      document.querySelector("#ver-badge a").textContent = rel.tag_name;
     } catch { /* static fallbacks stand */ }
   })();
 
   // Copy buttons on the command blocks.
-  document.querySelectorAll("pre").forEach(pre => {
-    const cmd = pre.querySelector("[data-cmd]");
-    if (!cmd) return;
-    const btn = document.createElement("button");
-    btn.className = "copy";
-    btn.textContent = "copy";
+  document.querySelectorAll(".thut-code__copy").forEach(btn => {
+    const cmd = btn.closest(".thut-code").querySelector("[data-cmd]");
+    if (!cmd) { btn.remove(); return; }
     btn.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(cmd.textContent);
@@ -311,7 +285,6 @@ sudo apt install ./term.hut_<span data-ver>&lt;version&gt;</span>_amd64.deb</spa
         setTimeout(() => (btn.textContent = "copy"), 1500);
       } catch { btn.textContent = "select + ⌘C"; }
     });
-    pre.appendChild(btn);
   });
 </script>
 

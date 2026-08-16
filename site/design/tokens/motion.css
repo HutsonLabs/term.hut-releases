@@ -1,0 +1,13 @@
+:root{
+  --ease:cubic-bezier(.2,0,.2,1); /* @kind other */
+  --dur-hover:120ms; /* @kind other */
+  --dur-disclose:180ms; /* @kind other */
+  --dur-sheet:240ms; /* @kind other */
+  --press-shift:1px;
+}
+/* The app's policy, verbatim. The in-flight spinner is exempt: a frozen spinner
+   reads as a hang, which is worse than the motion. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .thut-spinner{animation-duration:900ms!important;animation-iteration-count:infinite!important}
+}

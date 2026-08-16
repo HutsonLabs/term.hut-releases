@@ -1,0 +1,7 @@
+/* Maple Mono — OFL web build, Fontsource CDN (latin subset, woff2).
+   The app loads the desktop family off the user's own disk; the web build is the
+   plain family, so Nerd Font glyphs are NOT available in page copy.
+   No webfont for UI/display type: the stack falls back to the system UI face. */
+@font-face{font-family:'Maple Mono';font-style:normal;font-weight:400;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Maple Mono';font-style:normal;font-weight:500;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Maple Mono';font-style:normal;font-weight:700;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-700-normal.woff2) format('woff2')}

@@ -1,0 +1,36 @@
+/* --font-ui intentionally has no @font-face. The source spec ships no display
+   webfont: the audience is on macOS, so most visitors get Avenir Next locally and
+   everyone else falls to their system UI face — no layout shift, nothing to host.
+   If HutsonLabs licenses a web build, add the @font-face in tokens/fonts.css;
+   do not swap the family. */
+:root{
+  --font-ui:'Avenir Next',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;
+  --font-mono:'Maple Mono','SF Mono',Menlo,monospace;
+  --display-xl:76px;
+  --display-xl-lh:1.15; /* @kind other */
+  --display-xl-ls:-0.025em; /* @kind other */
+  --display-l:44px;
+  --display-l-lh:1.1; /* @kind other */
+  --display-l-ls:-0.02em; /* @kind other */
+  --title-l:28px;
+  --title-l-lh:1.2; /* @kind other */
+  --title-l-ls:-0.01em; /* @kind other */
+  --title-m:24px;    --title-s:19px;
+  --body-lead:19px;
+  --body-lead-lh:1.55; /* @kind other */
+  --body:16px;
+  --body-lh:1.65; /* @kind other */
+  --prose-lh:1.7; /* @kind other */
+  --body-s:15px;     --body-xs:14px;       --body-2xs:13px;
+  --mono:14px;
+  --mono-lh:1.6; /* @kind other */
+  --mono-s:13px; --mono-xs:12px; /* @kind other */
+  --micro:11px;      --micro-ls:0.08em; /* @kind other */
+
+  --weight-body:400; --weight-strong:600; /* @kind other */
+  --measure-body:68ch; --measure-lead:62ch; /* @kind other */
+
+  /* Mobile (<768). Body copy never shrinks below 16. */
+  --display-xl-mobile:40px; --display-l-mobile:30px; --title-l-mobile:22px;
+  --body-lead-mobile:17px;  --mono-mobile:13px;
+}

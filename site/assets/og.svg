@@ -1,0 +1,17 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+  <rect width="1200" height="1200" fill="hsl(240, 21%, 12%)"></rect>
+  <g transform="translate(52 285)">
+    
+    <g transform="translate(96 195) scale(3.75)">
+      <rect width="64" height="64" rx="14" fill="hsl(45, 7%, 10%)"></rect>
+      <g transform="translate(19.68 21.44) scale(0.88)" fill="none" stroke="hsl(17, 63%, 61%)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="0,0 14,12 0,24"></polyline>
+        <line x1="18" y1="23.5" x2="28" y2="23.5"></line>
+      </g>
+    </g>
+    <text x="400" y="300" font-family="Avenir Next, Helvetica Neue, Helvetica, sans-serif" font-size="92" font-weight="600" fill="hsl(226, 64%, 88%)">term.hut</text>
+    <text x="400" y="356" font-family="SF Mono, Menlo, monospace" font-size="30" fill="hsl(17, 63%, 61%)">a calm workspace</text>
+    <text x="400" y="404" font-family="Avenir Next, Segoe UI, Helvetica Neue, Helvetica, sans-serif" font-size="27" fill="hsl(227, 35%, 80%)">Rust PTY backend · xterm.js · Claude Code panel</text>
+  </g>
+</svg>

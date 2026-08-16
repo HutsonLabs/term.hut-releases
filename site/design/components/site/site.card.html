@@ -1,0 +1,34 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Site" subtitle="SiteHeader, FeatureCard, DocsNav, ChangelogEntry, SiteFooter" -->
+<!DOCTYPE html><html><head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font-ui)}#root{padding:20px}#root{padding:0}.pad{padding:20px;display:flex;flex-direction:column;gap:16px}.three{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, FeatureCard, DocsNav, ChangelogEntry, Button, CodeChip } = window.TermHutDesignSystem_6c66e0;
+const nav = [{href:'/features',label:'Features'},{href:'/docs',label:'Docs'},{href:'/changelog',label:'Changelog'}];
+function Demo(){return (
+<div>
+  <SiteHeader current="/docs" items={nav} mark="../../assets/favicon.svg" action={<Button variant="ghost" size="sm">download</Button>} />
+  <div className="pad">
+    <div className="three">
+      <FeatureCard number="01" title="Detached agents" href="/docs/detached-agents">Claude sessions aren't child processes. Closing the app detaches; reopening re-attaches and replays the stream.</FeatureCard>
+      <FeatureCard number="02" title="Anchored workspaces" href="/docs/anchored-workspaces">A directory binds its own session, terminal, editor and branch. Switch the anchor, switch all of it.</FeatureCard>
+    </div>
+    <div className="three">
+      <DocsNav current="detached-agents" groups={[{title:'Concepts',items:[{slug:'anchored-workspaces',label:'Anchored workspaces'},{slug:'detached-agents',label:'Detached agents'},{slug:'persistent-shells',label:'Persistent shells'},{slug:'ssh-remotes',label:'SSH remotes'}]}]} />
+      <ChangelogEntry version="0.9.4" date="2026-08-02" label="added" asset="term.hut_0.9.4_aarch64.dmg · 5.4 MB"
+        items={[<span key="a"><CodeChip>/btw</CodeChip> asks a side question without costing the turn.</span>,<span key="b">Chat tabs rename through the CLI's own <CodeChip>/rename</CodeChip>.</span>]} />
+    </div>
+  </div>
+  <SiteFooter mark="../../assets/favicon.svg" columns={[
+    {title:'Product',links:[{label:'Features'},{label:'Download'},{label:'Changelog'}]},
+    {title:'Docs',links:[{label:'Anchored workspaces'},{label:'Detached agents'},{label:'SSH'}]},
+    {title:'Legal',links:[{label:'License'},{label:'Privacy'}]}]} />
+</div>);}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>
