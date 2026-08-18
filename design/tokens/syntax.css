@@ -1,0 +1,18 @@
+/* Same class names the app's chat panel emits (codeBlocks.js), so a snippet
+   copied out of the app lands on the site already styled. */
+:root{
+  --hl-kw:var(--ctp-mauve);
+  --hl-fn:var(--ctp-blue);
+  --hl-type:var(--ctp-yellow);
+  --hl-str:var(--ctp-green);
+  --hl-num:var(--ctp-peach);
+  --hl-op:var(--ctp-sky);
+  --hl-punct:var(--ctp-overlay2);
+  --hl-cmt:var(--ctp-overlay0);
+  --hl-tag:var(--ctp-red);
+  --hl-esc:var(--ctp-pink);
+}
+.hl-kw{color:var(--hl-kw)}.hl-fn{color:var(--hl-fn)}.hl-type{color:var(--hl-type)}
+.hl-str{color:var(--hl-str)}.hl-num{color:var(--hl-num)}.hl-op{color:var(--hl-op)}
+.hl-punct{color:var(--hl-punct)}.hl-cmt{color:var(--hl-cmt);font-style:italic}
+.hl-tag{color:var(--hl-tag)}.hl-esc{color:var(--hl-esc)}

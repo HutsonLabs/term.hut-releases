@@ -71,6 +71,21 @@
     }
     .card-actions { margin-top: auto; padding-top: var(--s-1); }
 
+    /* ---- feature blocks — a heading, a mechanism, the surface it describes ---- */
+    .blocks { display: flex; flex-direction: column; gap: var(--s-10); }
+    .block { display: flex; flex-direction: column; gap: var(--s-2); }
+    .block p { max-width: var(--measure-body); }
+    /* The frame is the shipped screenshot treatment minus its titlebar: these
+       shots carry the app's own window chrome already, and two titlebars read
+       as two windows. */
+    .shot { margin-top: var(--s-3); }
+    .shot img { display: block; width: 100%; height: auto; }
+    .shot + .shot { margin-top: var(--s-4); }
+    .shot figcaption {
+      margin-top: var(--s-2); font-family: var(--font-mono); font-size: var(--micro);
+      line-height: 1.6; color: var(--ink-dim);
+    }
+
     /* A block cursor, not a blinking one: nothing on this page loops. */
     .cursor { display: inline-block; width: 0.55em; height: 1.05em; vertical-align: text-bottom; background: var(--accent); }
 
@@ -174,9 +189,189 @@
     </div>
   </section>
 
-  <section class="wrap" id="install">
+  <section class="wrap" id="window">
     <div class="thut-sechead">
       <span class="thut-sechead__num">02</span>
+      <h2 class="thut-sechead__title">In the window</h2>
+      <span class="thut-sechead__note">the panes, and what the chat knows</span>
+    </div>
+
+    <div class="thut-callout thut-callout--info">
+      <span class="thut-callout__label">about these images</span>
+      <p class="thut-callout__body">Every image below is rendered from the interface
+      mockups these surfaces were built against, using the app's own stylesheet — not a
+      photograph of a running build. The agent names, paths and numbers in them are
+      examples.</p>
+    </div>
+
+    <div class="blocks">
+
+      <article class="block">
+        <span class="thut-eyebrow">context · what this agent knows</span>
+        <h3 class="thut-feature__title">The files the session actually read</h3>
+        <p class="thut-feature__body">One panel lists the anchor's memory, the CLAUDE.md
+        chain, and the skills, hooks and MCP servers the session started with. Every row is
+        a file on the host that owns the session — local anchor, local file; ssh anchor,
+        remote file — and opening one opens that file in the editor pane. term.hut surfaces
+        the CLI's own files and implements no memory of its own.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/02-context.png" width="2240" height="1089" loading="lazy" decoding="async"
+                 alt="term.hut with the context panel open beside a finished answer: memory, the CLAUDE.md chain, three skills, one hook, and a dashed row saying no MCP servers are configured for this workspace.">
+          </div>
+          <figcaption>what this agent knows, over ~/code/term.hut · main — every row opens the file it names</figcaption>
+        </figure>
+      </article>
+
+      <article class="block">
+        <span class="thut-eyebrow">composer · slash commands</span>
+        <h3 class="thut-feature__title">Whatever the CLI advertises, the composer completes</h3>
+        <p class="thut-feature__body">Type <code class="thut-chip">/</code> and the composer
+        completes against the command list the CLI sends in its own init message — skills,
+        project commands, plugins. Install a skill and it is in the list next session;
+        nothing here is hardcoded. Tab completes the token without running it, ⌘↵ opens the
+        SKILL.md behind a row in the editor.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/03-skills.png" width="2240" height="840" loading="lazy" decoding="async"
+                 alt="The composer with a single slash typed: a popup lists /release, /code-review, /simplify, /security-review, /schedule and /btw, each tagged project, user or plugin.">
+          </div>
+          <figcaption>the list comes from the CLI init message — project, user and plugin commands, tagged by where they came from</figcaption>
+        </figure>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap" id="fleet">
+    <div class="thut-sechead">
+      <span class="thut-sechead__num">03</span>
+      <h2 class="thut-sechead__title">The fleet</h2>
+      <span class="thut-sechead__note">read from ~/.term-hut/agents — no attach needed</span>
+    </div>
+
+    <div class="blocks">
+
+      <article class="block">
+        <span class="thut-eyebrow">⌘⇧A · fleet palette</span>
+        <h3 class="thut-feature__title">Every agent, on every host you know</h3>
+        <p class="thut-feature__body">One keystroke over whatever panel is up. The list is
+        read out of the agent dirs on this Mac and over SSH — working, waiting on you,
+        finished, exited — without attaching to anything. ↵ attaches, so a session stalled
+        on a permission prompt is one keystroke from unblocked.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/01-fleet.png" width="2240" height="1089" loading="lazy" decoding="async"
+                 alt="The fleet palette open over a chat panel: agents grouped under this Mac and two SSH hosts, one of them stalled 38 minutes on a permission prompt for a database migration.">
+          </div>
+          <figcaption>five agents across three hosts; the stalled one says which command is waiting and for how long</figcaption>
+        </figure>
+      </article>
+
+      <article class="block">
+        <span class="thut-eyebrow">the unit · agent cards</span>
+        <h3 class="thut-feature__title">One card per agent dir, six faces, one size</h3>
+        <p class="thut-feature__body">State changes the badge and the tinted left border,
+        never the layout, so twenty agents stay scannable. Each card carries a five-line
+        window onto the most recent tool calls, read from the same transcript tail the state
+        is derived from; the model, effort and permission mode it was launched with; and
+        ring gauges for context and for the 5h and weekly windows. Clicking one opens a
+        scrollable details overlay.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/05-agent-cards.png" width="2240" height="743" loading="lazy" decoding="async"
+                 alt="Six agent cards at the same size: working, waiting on a permission prompt, waiting on a question, finished with a diff to review, stopped on an error, and exited with the transcript kept.">
+          </div>
+          <figcaption>the six faces — working, permission, question, finished, error, exited</figcaption>
+        </figure>
+      </article>
+
+      <article class="block">
+        <span class="thut-eyebrow">⌘⇧D · fleet dashboard</span>
+        <h3 class="thut-feature__title">The whole fleet, over the workspace</h3>
+        <p class="thut-feature__body">A panel over the panes rather than a window of its
+        own: one flat grid of every agent on every host, the ones needing you sorted first,
+        remote ones marked rather than separated. A filter over label, cwd and host; state
+        chips that carry their counts; the account's 5h and weekly rings; and a launcher.
+        The list toggle folds each card to one aligned row when the fleet is long.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/06-dashboard.png" width="2240" height="902" loading="lazy" decoding="async"
+                 alt="The fleet dashboard in grid view: seven agent cards over the workspace, two of them needing an answer, with filter, state chips, usage rings and a new agent button along the top.">
+          </div>
+          <figcaption>grid view — seven agents, two of them waiting on you</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/07-dashboard-list.png" width="2240" height="731" loading="lazy" decoding="async"
+                 alt="The same seven agents in list view: one row each, aligned by place, branch, last activity, quick action, context ring, model and state.">
+          </div>
+          <figcaption>list view — the same fleet, one row per agent, with the quick action still on the row</figcaption>
+        </figure>
+      </article>
+
+      <article class="block">
+        <span class="thut-eyebrow">launch · new agent</span>
+        <h3 class="thut-feature__title">The dialog prints the command it is sugar over</h3>
+        <p class="thut-feature__body">Where — a host and a recent workspace. What — a
+        prompt, with a label suggested from it. How to run — model, effort, permission mode,
+        in the composer's own order. And when: now, or on a schedule, which is cron on that
+        host calling the same command. The exact <code class="thut-chip">hut agent run</code>
+        line sits above the launch button, because the agent outlives the window that
+        started it.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/08-new-agent.png" width="2240" height="1026" loading="lazy" decoding="async"
+                 alt="The new agent dialog over the dashboard: workspace picker with recent hosts, a prompt, a suggested label, model, effort and permission chips, a now or scheduled choice, and the hut agent run command printed above the launch button.">
+          </div>
+          <figcaption>the printed command is what runs — the dialog adds nothing the CLI can't do</figcaption>
+        </figure>
+      </article>
+
+      <article class="block">
+        <span class="thut-eyebrow">unattended · hut agent run</span>
+        <h3 class="thut-feature__title">An agent that starts with no app running</h3>
+        <p class="thut-feature__body">The same command from a shell or a crontab spawns a
+        detached agent with term.hut nowhere in the picture; cron on the host is the whole
+        scheduler. The run writes an ordinary agent dir, so every device that can reach that
+        host discovers the finished work — the notification, the diff and the transcript are
+        there the next time you open the app.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/04-unattended.png" width="2240" height="809" loading="lazy" decoding="async"
+                 alt="A shell on an SSH host showing a crontab entry that calls hut agent run, a second run spawned by hand reporting its agent dir and pid, and a notifications panel offering to attach to the finished overnight agent.">
+          </div>
+          <figcaption>a crontab line, a detached run, and the notification it produced on another device</figcaption>
+        </figure>
+      </article>
+
+      <article class="block">
+        <span class="thut-eyebrow">hygiene · housekeeping</span>
+        <h3 class="thut-feature__title">The worktrees an agent leaves behind</h3>
+        <p class="thut-feature__body">Agents that work in
+        <code class="thut-chip">.claude/worktrees/</code> leave trees and branches after they
+        exit, and an uncommitted one outlives the run that made it. The broom sweeps every
+        repo a live or recent agent touched, on this Mac and over SSH, and triages what it
+        finds: clean and fully merged is pre-checked and removed with
+        <code class="thut-chip">git worktree remove</code> plus a branch delete — never
+        <code class="thut-chip">--force</code>, never <code class="thut-chip">-D</code>. A
+        dirty worktree is re-checked at removal time and refused whatever the caller asked
+        for. A repo the sweep could not read is listed as an error rather than left out.</p>
+        <figure class="shot">
+          <div class="thut-frame">
+            <img src="assets/shots/09-housekeeping.png" width="2240" height="871" loading="lazy" decoding="async"
+                 alt="The housekeeping drawer listing five leftovers across three repos and two hosts, the clean merged ones pre-checked, a dirty one left unchecked with its uncommitted diff, and a subagent session tree open on a card behind it.">
+          </div>
+          <figcaption>five leftovers, three repos, two hosts — the dirty one is never pre-checked</figcaption>
+        </figure>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap" id="install">
+    <div class="thut-sechead">
+      <span class="thut-sechead__num">04</span>
       <h2 class="thut-sechead__title">Try it if you'd like</h2>
     </div>
 
@@ -244,6 +439,8 @@
     <div class="thut-footer__col">
       <span class="thut-footer__head">Project</span>
       <a class="thut-footer__link" href="#why">Why it exists</a>
+      <a class="thut-footer__link" href="#window">In the window</a>
+      <a class="thut-footer__link" href="#fleet">The fleet</a>
       <a class="thut-footer__link" href="https://github.com/HutsonLabs/term.hut-releases/releases">Release assets</a>
     </div>
   </div>

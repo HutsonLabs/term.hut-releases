@@ -1,0 +1,34 @@
+/* Catppuccin Mocha, as mapped in the app (ui/src/themes.js).
+   Only slots verified in the source are listed. Dark only — there is no light theme. */
+:root{
+  --ctp-crust:hsl(240 23% 9%);
+  --ctp-mantle:hsl(240 21% 12%);
+  --ctp-base:hsl(240 21% 15%);
+  --ctp-surface0:hsl(237 16% 23%);
+  --ctp-surface1:hsl(234 13% 31%);
+  --ctp-overlay0:hsl(231 11% 47%);
+  --ctp-overlay1:hsl(230 13% 55%);
+  --ctp-overlay2:hsl(228 17% 64%);
+  --ctp-subtext0:hsl(228 24% 72%);
+  --ctp-subtext1:hsl(227 35% 80%);
+  --ctp-text:hsl(226 64% 88%);
+
+  --ctp-mauve:hsl(267 84% 81%);
+  --ctp-peach:hsl(23 92% 75%);
+  --ctp-green:hsl(115 54% 76%);
+  --ctp-yellow:hsl(41 86% 83%);
+  --ctp-red:hsl(343 81% 75%);
+  --ctp-blue:hsl(217 92% 76%);
+  --ctp-teal:hsl(170 57% 73%);
+  --ctp-sky:hsl(189 71% 73%);
+  --ctp-pink:hsl(316 72% 86%);
+
+  /* Brand peach — the stroke color of the >_ glyph in favicon.svg / og.svg.
+     Darker and less saturated than ctp-peach; it is the mark, not a palette slot. */
+  --mark-peach:hsl(17 63% 61%);
+  --mark-peach-active:hsl(17 63% 52%);
+
+  /* Wash for the inline code chip, from the app's chat panel. */
+  --code-chip-bg:hsl(23 45% 14%);
+  --row-stripe:hsl(240 21% 50% / .05);
+}

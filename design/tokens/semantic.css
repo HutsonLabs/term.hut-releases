@@ -1,0 +1,37 @@
+/* Semantic aliases. The site inverts the app's ground: mantle is the page,
+   base is the card, so cards lift off the page instead of sinking into it. */
+:root{
+  --page:var(--ctp-mantle);
+  --card:var(--ctp-base);
+  --well:var(--ctp-crust);
+  --raised:var(--ctp-surface0);
+
+  --ink:var(--ctp-text);
+  --ink-muted:var(--ctp-subtext1);
+  --ink-soft:var(--ctp-subtext0);
+  --ink-dim:var(--ctp-overlay2);
+  --ink-decor:var(--ctp-overlay0);
+  --ink-on-accent:var(--ctp-crust);
+
+  --hairline:var(--ctp-surface1);
+  --hairline-strong:var(--ctp-overlay0);
+  --hairline-control:var(--ctp-overlay0);
+
+  --accent:var(--mark-peach);
+  --accent-hover:var(--ctp-peach);
+  --accent-active:var(--mark-peach-active);
+  --focus:var(--ctp-mauve);
+  --selection:hsl(267 84% 81% / .25);
+
+  --ok:var(--ctp-green);
+  --warn:var(--ctp-yellow);
+  --danger:var(--ctp-red);
+  --info:var(--ctp-blue);
+  --remote:var(--ctp-teal);
+
+  /* The three approved gradients. Nothing else gets one. */
+  --grad-ground:linear-gradient(180deg,var(--ctp-mantle) 0%,var(--ctp-crust) 100%); /* @kind other */
+  --grad-bloom:radial-gradient(60% 100% at 50% 0%,hsl(17 63% 61% / .10) 0%,transparent 70%); /* @kind other */
+  --grad-card-edge:linear-gradient(160deg,var(--ctp-overlay0) 0%,var(--ctp-surface1) 40%,var(--ctp-surface0) 100%); /* @kind other */
+}
+::selection{background:var(--selection)}

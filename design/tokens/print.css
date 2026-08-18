@@ -1,0 +1,12 @@
+/* Docs get printed and pasted into tickets, so they invert.
+   Dark-only is a screen decision; a printer does not have a dark mode. */
+:root{
+  --paper:hsl(45 12% 97%);
+  --paper-alt:hsl(45 14% 94%);
+  --print-ink:hsl(240 10% 12%);
+  --print-muted:hsl(240 8% 25%);
+  --print-dim:hsl(240 6% 45%);
+  --print-rule:hsl(240 8% 82%);
+  --print-body:11pt; /* @kind other */
+  --print-mono:10pt; /* @kind other */
+}

@@ -1,0 +1,36 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Content" subtitle="CodeBlock, Callout, ScreenshotFrame, EmptyState, Prose" -->
+<!DOCTYPE html><html><head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font-ui)}#root{padding:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const { CodeBlock, Callout, ScreenshotFrame, EmptyState, Prose, CodeChip } = window.TermHutDesignSystem_6c66e0;
+function Demo(){return (
+<div className="grid">
+  <div style={{display:'flex',flexDirection:'column',gap:16,minWidth:0}}>
+    <CodeBlock language="zsh">
+      <div><span className="thut-code__prompt">$</span> hut open ~/src/term.hut</div>
+      <div className="hl-cmt"># anchors the repo, attaches its session</div>
+      <div><span style={{color:'var(--ok)'}}>✓</span> agent <span style={{color:'var(--remote)'}}>a7f3</span> re-attached <span style={{color:'var(--ink-soft)'}}>(2h 14m, 1.4k lines)</span></div>
+    </CodeBlock>
+    <Callout tone="info" label="note">Auth is inherited from your own <CodeChip>claude</CodeChip> CLI credentials. term.hut contains no Anthropic auth code.</Callout>
+    <EmptyState title="No releases yet.">The feed reads the releases repo directly, so this page fills itself the moment a dmg is published.</EmptyState>
+  </div>
+  <div style={{display:'flex',flexDirection:'column',gap:16,minWidth:0}}>
+    <ScreenshotFrame title="term.hut — ~/src/term.hut" height={150} placeholder={<span>app screenshot<br/>1600×1000 · 2x · real window, no mockup</span>} />
+    <Prose as="article" style={{display:'flex',flexDirection:'column',gap:12}}>
+      <h3>Detached agents</h3>
+      <p>A session is not a child process. It runs behind a FIFO in <CodeChip>~/.term-hut/agents/&lt;id&gt;/</CodeChip> on whichever host owns it.</p>
+      <blockquote>The app is a viewer, not the owner.</blockquote>
+      <table><thead><tr><th>event</th><th>source</th></tr></thead>
+      <tbody><tr><td>claude://message</td><td>claude.rs</td></tr><tr><td>pty://output</td><td>main.rs</td></tr></tbody></table>
+    </Prose>
+  </div>
+</div>);}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>

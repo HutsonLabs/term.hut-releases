@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>term.hut — website design system</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="" />
+<style>
+  @font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-400-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 500; font-display: swap;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Maple Mono'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@5.3.0/latin-700-normal.woff2) format('woff2'); }
+  html, body { margin: 0; padding: 0; background: hsl(240, 21%, 12%); }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: hsl(17, 63%, 61%); text-decoration: none; border-bottom: 1px solid hsla(17, 63%, 61%, 0.35); }
+  a:hover { color: hsl(23, 92%, 75%); border-bottom-color: hsl(23, 92%, 75%); }
+</style>
+</helmet>
+
+<div style="background: linear-gradient(180deg, hsl(240, 21%, 12%) 0%, hsl(240, 21%, 12%) 45%, hsl(240, 23%, 9%) 100%); color: hsl(226, 64%, 88%); font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif; padding: 72px 40px 140px; min-height: 100vh; text-wrap: pretty;">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 96px;">
+
+  <header style="display: flex; flex-direction: column; gap: 28px; background: radial-gradient(52% 120% at 12% -10%, hsla(17, 63%, 61%, 0.10) 0%, transparent 70%); margin: -72px -40px 0; padding: 72px 40px 40px;">
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <img src="ui/favicon.svg" alt="term.hut" style="width: 44px; height: 44px; display: block;" />
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">term.hut</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">website design system · draft 01</div>
+      </div>
+    </div>
+    <h1 style="margin: 0; font-size: 52px; line-height: 1.05; font-weight: 600; letter-spacing: -0.02em; max-width: 20ch;">The app's tokens, extended for a page.</h1>
+    <p style="margin: 0; font-size: 19px; line-height: 1.55; color: hsl(227, 35%, 80%); max-width: 62ch;">Every color, stack and radius below is read out of <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 16px; color: hsl(226, 64%, 88%);">ui/index.html</span>'s <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 16px; color: hsl(226, 64%, 88%);">:root</span> and <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 16px; color: hsl(226, 64%, 88%);">ui/src/themes.js</span>. What the app had no need for — a display type scale, a page grid, section patterns, imagery treatment — is added here and marked as added.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.02em;">
+      <span style="padding: 6px 10px; border-radius: 999px; border: 1px solid hsl(234, 13%, 31%); color: hsl(228, 24%, 72%);">source: HutsonLabs/term.hut@main</span>
+      <span style="padding: 6px 10px; border-radius: 999px; border: 1px solid hsl(234, 13%, 31%); color: hsl(228, 24%, 72%);">palette: Catppuccin Mocha</span>
+      <span style="padding: 6px 10px; border-radius: 999px; border: 1px solid hsl(234, 13%, 31%); color: hsl(228, 24%, 72%);">dark only</span>
+      <span style="padding: 6px 10px; border-radius: 999px; border: 1px solid hsl(234, 13%, 31%); color: hsl(228, 24%, 72%);">pages: home · features · docs · changelog · legal</span>
+    </div>
+  </header>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">01</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Provenance</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">what is inherited, what is new, what is open</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(115, 54%, 76%);">Inherited</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.65; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 6px;">
+          <li>26-slot Catppuccin Mocha palette</li>
+          <li>Chrome mapping: bg / surface / border / text / accent</li>
+          <li>Mono + UI font stacks</li>
+          <li>Radii 5–16px, hairline borders</li>
+          <li>The <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">&gt;_</span> mark and its peach</li>
+          <li>Tabler outline icons from iconify.design</li>
+        </ul>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(23, 92%, 75%);">Added for web</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.65; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 6px;">
+          <li>Display type scale (52–96px)</li>
+          <li>1120px grid, 24px gutters, section rhythm</li>
+          <li>Marketing button sizes (44px+ targets)</li>
+          <li>Screenshot and code-block frames</li>
+          <li>Docs and changelog patterns</li>
+        </ul>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(41, 86%, 83%);">Still open</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.65; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 6px;">
+          <li>Pricing, licensing, distribution terms</li>
+          <li>Whether a light appearance ever ships</li>
+          <li>Product screenshots (none exist yet)</li>
+          <li>Build target: hand-written or site builder</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">02</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Ground and ink</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">the site inverts the app: mantle is the page, base is the card</span>
+    </div>
+    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: hsl(228, 24%, 72%); max-width: 70ch;">In the app, <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 14px;">--ctp-base</span> is the page and <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 14px;">--ctp-mantle</span> the panels. On the site that flips, so cards lift off the page instead of sinking into it. Same family, different reading.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+      <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden;">
+        <div style="height: 92px; background: hsl(240, 21%, 12%);"></div>
+        <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; background: hsl(240, 21%, 15%);">
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">--page</div>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">ctp-mantle · hsl(240 21% 12%)</div>
+          <div style="font-size: 13px; color: hsl(228, 24%, 72%);">Every page background.</div>
+        </div>
+      </div>
+      <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden;">
+        <div style="height: 92px; background: hsl(240, 21%, 15%);"></div>
+        <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; background: hsl(240, 21%, 15%);">
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">--card</div>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">ctp-base · hsl(240 21% 15%)</div>
+          <div style="font-size: 13px; color: hsl(228, 24%, 72%);">Cards, tables, docs sidebar.</div>
+        </div>
+      </div>
+      <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden;">
+        <div style="height: 92px; background: hsl(240, 23%, 9%);"></div>
+        <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; background: hsl(240, 21%, 15%);">
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">--well</div>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">ctp-crust · hsl(240 23% 9%)</div>
+          <div style="font-size: 13px; color: hsl(228, 24%, 72%);">Code blocks, terminal frames, footer.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="height: 34px; border-radius: 6px; background: hsl(226, 64%, 88%);"></div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 24%, 72%);">--ink<br />ctp-text 226 64% 88%</div>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="height: 34px; border-radius: 6px; background: hsl(227, 35%, 80%);"></div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 24%, 72%);">--ink-muted<br />ctp-subtext1 · body copy</div>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="height: 34px; border-radius: 6px; background: hsl(230, 13%, 55%);"></div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 24%, 72%);">--ink-dim<br />ctp-overlay1 · labels, meta</div>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="height: 34px; border-radius: 6px; background: hsl(234, 13%, 31%); border-bottom: 2px solid hsl(231, 11%, 47%);"></div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 24%, 72%);">--hairline / -strong<br />surface1 · overlay0</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">03</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Accent</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">peach leads on the site, mauve stays the interaction color</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 64px; height: 64px; border-radius: 14px; background: hsl(17, 63%, 61%);"></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-size: 17px; font-weight: 600;">Mark peach — primary</div>
+            <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">hsl(17, 63%, 61%)</div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: hsl(227, 35%, 80%);">The exact stroke color of the <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">&gt;_</span> glyph in <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">favicon.svg</span> and <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">og.svg</span>. It carries download buttons, links, section numbers and the one accent line in a hero. It is not used anywhere in the app chrome, which is what keeps the site from looking like a screenshot of the app.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 64px; height: 64px; border-radius: 14px; background: hsl(267, 84%, 81%);"></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-size: 17px; font-weight: 600;">Mauve — inherited</div>
+            <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">hsl(267, 84%, 81%) · --accent</div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: hsl(227, 35%, 80%);">The app's accent. On the site it is reserved for the states the app already spends it on: focus rings, text selection (<span style="background: hsla(267, 84%, 81%, 0.25);">25% wash</span>), and active docs navigation. Never a marketing surface.</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 8px 12px; border-radius: 8px; background: hsla(115, 54%, 76%, 0.12); color: hsl(115, 54%, 76%); border: 1px solid hsla(115, 54%, 76%, 0.3);">green · shipped, success</span>
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 8px 12px; border-radius: 8px; background: hsla(41, 86%, 83%, 0.12); color: hsl(41, 86%, 83%); border: 1px solid hsla(41, 86%, 83%, 0.3);">yellow · caveat, beta</span>
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 8px 12px; border-radius: 8px; background: hsla(343, 81%, 75%, 0.12); color: hsl(343, 81%, 75%); border: 1px solid hsla(343, 81%, 75%, 0.3);">red · breaking, removed</span>
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 8px 12px; border-radius: 8px; background: hsla(217, 92%, 76%, 0.12); color: hsl(217, 92%, 76%); border: 1px solid hsla(217, 92%, 76%, 0.3);">blue · info, docs links</span>
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 8px 12px; border-radius: 8px; background: hsla(170, 57%, 73%, 0.12); color: hsl(170, 57%, 73%); border: 1px solid hsla(170, 57%, 73%, 0.3);">teal · SSH, remote</span>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">04</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Type</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">two stacks, no webfont for headings</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">UI / display</div>
+        <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.01em;">Avenir Next</div>
+        <code style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 24%, 72%); line-height: 1.6;">"Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif</code>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">Unchanged from <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">--font-ui</span>. The audience is on macOS, so most visitors see the same face the app uses; everyone else falls to their system UI font. No webfont, no layout shift, nothing to host.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Mono</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 30px; font-weight: 500;">Maple Mono</div>
+        <code style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 24%, 72%); line-height: 1.6;">"Maple Mono", "SF Mono", Menlo, monospace</code>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">The same family the app asks for. In the app it is loaded off the user's own disk (<span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">fontloader.js</span>) because WebKit can't see <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">~/Library/Fonts</span>; the site self-hosts the OFL web build from the Fontsource CDN at 400/500/700. One caveat to carry: the web build is the plain family, so Nerd Font glyphs are not available in page copy — spell those out or use an icon.</p>
+      </div>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; min-width: 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <div style="font-size: clamp(48px, 7vw, 76px); line-height: 1.15; font-weight: 600; letter-spacing: -0.025em; min-width: 0;">Detached agents</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: right; flex: none;">display/xl<br />76 / 1.0 / 600 / -0.025em<br />hero only, one per page</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; min-width: 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <div style="font-size: 44px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em;">Section heading</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: right; flex: none;">display/l<br />44 / 1.1 / 600 / -0.02em</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; min-width: 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <div style="font-size: 28px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em;">Card and docs H2</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: right; flex: none;">title/l<br />28 / 1.2 / 600</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; min-width: 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <div style="font-size: 19px; line-height: 1.55; color: hsl(227, 35%, 80%); max-width: 56ch;">Lead paragraph. The one that carries a claim, sitting under a display heading and above the buttons.</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: right; flex: none;">body/lead<br />19 / 1.55 / ink-muted</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; min-width: 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <div style="font-size: 16px; line-height: 1.65; color: hsl(227, 35%, 80%); max-width: 68ch;">Body. Docs prose, feature copy, changelog entries. Measure capped at 68 characters; the app's own README voice sets the tone — precise, technical, reasons stated.</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: right; flex: none;">body/base<br />16 / 1.65 / max 68ch</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; min-width: 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 14px; line-height: 1.6; color: hsl(226, 64%, 88%);">cargo tauri build --release</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: right; flex: none;">mono/base<br />14 / 1.6 · code, paths, keys</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Eyebrow label</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: right; flex: none;">mono/micro<br />11 / 0.08em / uppercase</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">05</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Icons</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">Tabler outline, via iconify.design — the app's set, unchanged</span>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-wrap: wrap; gap: 32px; align-items: baseline;">
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Set</span><span style="font-size: 15px;">Tabler outline (iconify)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Grid</span><span style="font-size: 15px;">24 × 24 viewBox</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Stroke</span><span style="font-size: 15px;">2, round cap + join</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Color</span><span style="font-size: 15px;">currentColor, never a fill</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Web sizes</span><span style="font-size: 15px;">16 inline · 20 nav · 26 feature</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;">
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="color: hsl(226, 64%, 88%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6h11" /><path d="M12 12h8" /><path d="M15 18h5" /><path d="M5 6v.01" /><path d="M8 12v.01" /><path d="M11 18v.01" /></svg></span>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); line-height: 1.6;">tabler:list-tree<br /><span style="color: hsl(228, 24%, 72%);">file tree, anchored workspaces</span></div>
+        </div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="color: hsl(226, 64%, 88%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 8l0 8" /><path d="M9 18h6a2 2 0 0 0 2 -2v-5" /><path d="M14 14l3 -3l3 3" /></svg></span>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); line-height: 1.6;">tabler:git-branch<br /><span style="color: hsl(228, 24%, 72%);">branches, worktrees</span></div>
+        </div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="color: hsl(226, 64%, 88%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z" /></svg></span>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); line-height: 1.6;">tabler:sparkles<br /><span style="color: hsl(228, 24%, 72%);">anything the agent does</span></div>
+        </div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="color: hsl(226, 64%, 88%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M12 11l0 6" /><path d="M9 14l6 0" /></svg></span>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); line-height: 1.6;">tabler:file-plus<br /><span style="color: hsl(228, 24%, 72%);">editor, file actions</span></div>
+        </div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="color: hsl(226, 64%, 88%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 19h-7a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2h4l3 3h7a2 2 0 0 1 2 2v3.5" /><path d="M16 19h6" /><path d="M19 16v6" /></svg></span>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); line-height: 1.6;">tabler:folder-plus<br /><span style="color: hsl(228, 24%, 72%);">directories, anchors</span></div>
+        </div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="color: hsl(226, 64%, 88%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg></span>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); line-height: 1.6;">tabler:dots<br /><span style="color: hsl(228, 24%, 72%);">more, overflow menus</span></div>
+        </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Rules</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 8px;">
+          <li>Pull from Tabler outline only. A second icon family reads as a different product.</li>
+          <li>Inline the SVG and inherit <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">currentColor</span> — no icon font, no sprite request.</li>
+          <li>Keep the <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">stroke-width: 2</span> at every size; don't optically thin them.</li>
+          <li>An icon in marketing copy earns its place by naming a real surface — tree, branch, agent — never as decoration.</li>
+        </ul>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">In use</div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 8px;">
+          <span style="color: hsl(17, 63%, 61%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2zm-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z" /></svg></span>
+          <span style="font-size: 15px; color: hsl(226, 64%, 88%);">Agent sessions outlive the app</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 8px;">
+          <span style="color: hsl(170, 57%, 73%); display: flex;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M7 8l0 8" /><path d="M9 18h6a2 2 0 0 0 2 -2v-5" /><path d="M14 14l3 -3l3 3" /></svg></span>
+          <span style="font-size: 15px; color: hsl(226, 64%, 88%);">A worktree per anchor, local or over SSH</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">Signal colors carry meaning here the same way they do in the app: teal for remote, peach for the agent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">06</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Space, radius, grid</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Spacing · 4px base</div>
+        <div style="display: flex; align-items: flex-end; gap: 10px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 4px; height: 4px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">4</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">8</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 12px; height: 12px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">12</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">16</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 24px; height: 24px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">24</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 40px; height: 40px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">40</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 64px; height: 64px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">64</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 96px; height: 96px; background: hsl(17, 63%, 61%);"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">96</span></div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">Card padding 24. Grid gutter 24. Stack gap inside a card 12. Between sections 96 (120 around a hero). The app's sub-8px steps stay in the app.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Radius</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 56px; height: 44px; border: 1px solid hsl(231, 11%, 47%); border-radius: 5px;"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">5 chip</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 56px; height: 44px; border: 1px solid hsl(231, 11%, 47%); border-radius: 8px;"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">8 button</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 56px; height: 44px; border: 1px solid hsl(231, 11%, 47%); border-radius: 12px;"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">12 card</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 56px; height: 44px; border: 1px solid hsl(231, 11%, 47%); border-radius: 16px;"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">16 frame</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 56px; height: 44px; border: 1px solid hsl(231, 11%, 47%); border-radius: 999px;"></div><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(228, 17%, 64%);">pill</span></div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">Straight from the app's chrome, one step up in scale. No shadows: the app has none, and depth here comes from the mantle/base/crust ladder.</p>
+      </div>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Grid</div>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 24%, 72%);">12 col · 1120 max · 24 gutter · 40 page pad · 720 for prose</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;">
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+        <div style="height: 56px; background: hsla(17, 63%, 61%, 0.14); border-top: 2px solid hsl(17, 63%, 61%);"></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">07</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Components</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">44px minimum target on every clickable</span>
+    </div>
+
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Buttons</div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px;">
+        <a href="https://github.com/HutsonLabs/term.hut-releases/releases" style="height: 52px; padding: 0 24px; border: 0; border-radius: 8px; background: hsl(17, 63%, 61%); color: hsl(240, 23%, 9%); font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; text-decoration: none;" style-hover="background: hsl(23, 92%, 75%); color: hsl(240, 23%, 9%);">Download for macOS<span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; font-weight: 400; opacity: 0.75;">5.4 MB · dmg</span></a>
+        <button style="height: 52px; padding: 0 24px; border: 1px solid hsl(231, 11%, 47%); border-radius: 8px; background: transparent; color: hsl(226, 64%, 88%); font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer;" style-hover="background: hsl(237, 16%, 23%); border-color: hsl(228, 17%, 64%);">Read the docs</button>
+        <button style="height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: transparent; color: hsl(227, 35%, 80%); font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; cursor: pointer;" style-hover="color: hsl(17, 63%, 61%);">changelog →</button>
+        <button disabled="" style="height: 44px; padding: 0 18px; border: 1px solid hsl(234, 13%, 31%); border-radius: 8px; background: transparent; color: hsl(231, 11%, 47%); font-family: inherit; font-size: 15px; cursor: not-allowed;">Intel build — none</button>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%); max-width: 70ch;">Every download link points at <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">github.com/HutsonLabs/term.hut-releases/releases</span> — the assets-only repo; the site never hosts a binary itself, and the version and size shown are read from that feed rather than typed into the page. One filled button per view. The dmg's real size and architecture ride inside the primary label rather than in copy beneath it — the audience reads that as information, not as marketing.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 18px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Site header</div>
+        <div style="display: flex; align-items: center; gap: 20px; height: 60px; padding: 0 18px; background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px;">
+          <img src="ui/favicon.svg" alt="" style="width: 24px; height: 24px; display: block;" />
+          <span style="font-size: 15px; font-weight: 600;">term.hut</span>
+          <nav style="display: flex; gap: 18px; margin-left: 12px; font-size: 14px; color: hsl(227, 35%, 80%);">
+            <span>Features</span>
+            <span style="color: hsl(226, 64%, 88%); border-bottom: 2px solid hsl(17, 63%, 61%); padding-bottom: 2px;">Docs</span>
+            <span>Changelog</span>
+          </nav>
+          <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">download</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">60px tall, crust ground, hairline underneath. Deliberately not the app titlebar: no traffic lights, no drag region.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 18px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Badges</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 5px 10px; border-radius: 999px; background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); color: hsl(228, 24%, 72%);">v0.9.4</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 5px 10px; border-radius: 999px; background: hsla(115, 54%, 76%, 0.12); border: 1px solid hsla(115, 54%, 76%, 0.3); color: hsl(115, 54%, 76%);">signed &amp; notarized</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 5px 10px; border-radius: 999px; background: hsla(170, 57%, 73%, 0.12); border: 1px solid hsla(170, 57%, 73%, 0.3); color: hsl(170, 57%, 73%);">ssh</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 5px 10px; border-radius: 999px; background: hsla(41, 86%, 83%, 0.12); border: 1px solid hsla(41, 86%, 83%, 0.3); color: hsl(41, 86%, 83%);">macOS 12+</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 5px 10px; border-radius: 5px; background: hsl(23, 45%, 14%); color: hsl(23, 92%, 75%);">inline code chip</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">Always mono, always factual — version, requirement, capability. Never a superlative in a pill.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="background: linear-gradient(hsl(240, 21%, 15%), hsl(240, 21%, 15%)) padding-box, linear-gradient(160deg, hsl(231, 11%, 47%) 0%, hsl(234, 13%, 31%) 40%, hsl(237, 16%, 23%) 100%) border-box; border: 1px solid transparent; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(17, 63%, 61%);">01</div>
+        <h3 style="margin: 0; font-size: 19px; font-weight: 600; line-height: 1.3;">Detached agents</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: hsl(227, 35%, 80%);">Claude sessions aren't child processes. Closing the app detaches; reopening re-attaches and replays the stream.</p>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%); margin-top: 4px;">how it works →</span>
+      </div>
+      <div style="background: linear-gradient(hsl(240, 21%, 15%), hsl(240, 21%, 15%)) padding-box, linear-gradient(160deg, hsl(231, 11%, 47%) 0%, hsl(234, 13%, 31%) 40%, hsl(237, 16%, 23%) 100%) border-box; border: 1px solid transparent; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(17, 63%, 61%);">02</div>
+        <h3 style="margin: 0; font-size: 19px; font-weight: 600; line-height: 1.3;">Anchored workspaces</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: hsl(227, 35%, 80%);">A directory binds its own session, terminal, editor and branch. Switch the anchor, switch all of it.</p>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%); margin-top: 4px;">how it works →</span>
+      </div>
+      <div style="background: linear-gradient(hsl(240, 21%, 15%), hsl(240, 21%, 15%)) padding-box, linear-gradient(160deg, hsl(231, 11%, 47%) 0%, hsl(234, 13%, 31%) 40%, hsl(237, 16%, 23%) 100%) border-box; border: 1px solid transparent; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(17, 63%, 61%);">03</div>
+        <h3 style="margin: 0; font-size: 19px; font-weight: 600; line-height: 1.3;">One surface</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: hsl(227, 35%, 80%);">Terminal, tree, LSP editor and agent chat share state in a single window instead of juggled apps.</p>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%); margin-top: 4px;">how it works →</span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Code block</div>
+        <div style="min-width: 0; background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid hsl(234, 13%, 31%); font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);"><span>zsh</span><span>copy</span></div>
+          <div style="min-width: 0; padding: 16px; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; line-height: 1.7; color: hsl(226, 64%, 88%); display: flex; flex-direction: column;">
+            <div><span style="color: hsl(17, 63%, 61%);">$</span> hut open ~/src/term.hut</div>
+            <div style="color: hsl(231, 11%, 47%);"># anchors the repo, attaches its session</div>
+            <div><span style="color: hsl(115, 54%, 76%);">✓</span> agent <span style="color: hsl(170, 57%, 73%);">a7f3</span> re-attached <span style="color: hsl(228, 24%, 72%);">(2h 14m, 1.4k lines)</span></div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">Crust ground, ANSI hues used exactly as the terminal maps them. Prompt sigil in peach.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Screenshot frame</div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 16px; overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; background: hsl(240, 21%, 12%); border-bottom: 1px solid hsl(234, 13%, 31%);">
+            <span style="width: 11px; height: 11px; border-radius: 999px; background: hsl(343, 81%, 75%);"></span>
+            <span style="width: 11px; height: 11px; border-radius: 999px; background: hsl(41, 86%, 83%);"></span>
+            <span style="width: 11px; height: 11px; border-radius: 999px; background: hsl(115, 54%, 76%);"></span>
+            <span style="margin-left: 10px; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">term.hut — ~/src/term.hut</span>
+          </div>
+          <div style="height: 190px; background-color: hsl(240, 23%, 9%); background-image: repeating-linear-gradient(135deg, hsla(228, 17%, 64%, 0.07) 0 8px, transparent 8px 16px); display: flex; align-items: center; justify-content: center;">
+            <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); text-align: center; line-height: 1.7;">app screenshot<br />1600×1000 · 2x · real window, no mockup</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 24%, 72%);">The frame reproduces the app's own overlay titlebar so a screenshot reads as the Mac app it is. No perspective, no floating device art.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Docs nav + callout</div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); padding: 6px 10px;">Concepts</div>
+          <div style="padding: 9px 10px; border-radius: 6px; font-size: 14px; color: hsl(227, 35%, 80%);">Anchored workspaces</div>
+          <div style="padding: 9px 10px; border-radius: 6px; font-size: 14px; color: hsl(226, 64%, 88%); background: hsl(237, 16%, 23%); border-left: 2px solid hsl(267, 84%, 81%);">Detached agents</div>
+          <div style="padding: 9px 10px; border-radius: 6px; font-size: 14px; color: hsl(227, 35%, 80%);">Persistent shells</div>
+          <div style="padding: 9px 10px; border-radius: 6px; font-size: 14px; color: hsl(227, 35%, 80%);">SSH remotes</div>
+        </div>
+        <div style="background: hsla(217, 92%, 76%, 0.08); border: 1px solid hsla(217, 92%, 76%, 0.28); border-radius: 10px; padding: 16px 18px; display: flex; gap: 12px;">
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(217, 92%, 76%); flex: none;">note</span>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Auth is inherited from your own <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">claude</span> CLI credentials. term.hut contains no Anthropic auth code.</p>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Changelog entry</div>
+        <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 18px; font-weight: 500; color: hsl(17, 63%, 61%);">0.9.4</span>
+            <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">2026-08-02</span>
+            <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; padding: 4px 9px; border-radius: 999px; background: hsla(115, 54%, 76%, 0.12); border: 1px solid hsla(115, 54%, 76%, 0.3); color: hsl(115, 54%, 76%);">added</span>
+          </div>
+          <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 6px;">
+            <li><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(23, 92%, 75%);">/btw</span> asks a side question without costing the turn.</li>
+            <li>Chat tabs rename through the CLI's own <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(23, 92%, 75%);">/rename</span>, so the name survives a restart.</li>
+          </ul>
+          <div style="border-top: 1px solid hsl(234, 13%, 31%); padding-top: 12px; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">term.hut_0.9.4_aarch64.dmg · 5.4 MB</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Footer</div>
+      <div style="background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 28px; display: flex; align-items: flex-start; gap: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <img src="ui/favicon.svg" alt="" style="width: 28px; height: 28px; display: block;" />
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); line-height: 1.7;">HutsonLabs<br />com.hutsonlabs.termhut</div>
+        </div>
+        <div style="display: flex; gap: 48px; margin-left: auto; font-size: 14px;">
+          <div style="display: flex; flex-direction: column; gap: 8px; color: hsl(227, 35%, 80%);"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Product</span><span>Features</span><span>Download</span><span>Changelog</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px; color: hsl(227, 35%, 80%);"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Docs</span><span>Anchored workspaces</span><span>Detached agents</span><span>SSH</span></div>
+          <div style="display: flex; flex-direction: column; gap: 8px; color: hsl(227, 35%, 80%);"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Legal</span><span>License</span><span>Privacy</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">08</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Page patterns</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">skeletons, not layouts to copy pixel-for-pixel</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="border: 1px dashed hsl(231, 11%, 47%); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(23, 92%, 75%);">home</div>
+        <div style="height: 12px; background: hsl(240, 23%, 9%); border-radius: 4px;"></div>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding: 18px 0;">
+          <div style="height: 28px; width: 80%; background: hsl(237, 16%, 23%); border-radius: 4px;"></div>
+          <div style="height: 28px; width: 55%; background: hsl(237, 16%, 23%); border-radius: 4px;"></div>
+          <div style="height: 10px; width: 65%; background: hsl(240, 21%, 15%); border-radius: 4px; margin-top: 6px;"></div>
+          <div style="display: flex; gap: 8px; margin-top: 8px;"><div style="height: 22px; width: 110px; background: hsl(17, 63%, 61%); border-radius: 6px;"></div><div style="height: 22px; width: 84px; border: 1px solid hsl(231, 11%, 47%); border-radius: 6px;"></div></div>
+        </div>
+        <div style="height: 120px; background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 8px;"></div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px;"><div style="height: 54px; background: hsl(240, 21%, 15%); border-radius: 6px;"></div><div style="height: 54px; background: hsl(240, 21%, 15%); border-radius: 6px;"></div><div style="height: 54px; background: hsl(240, 21%, 15%); border-radius: 6px;"></div></div>
+        <p style="margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: hsl(228, 24%, 72%);">Claim, download, one wide screenshot, the three positioning claims. Nothing below it that a developer wouldn't scroll for.</p>
+      </div>
+      <div style="border: 1px dashed hsl(231, 11%, 47%); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(23, 92%, 75%);">docs</div>
+        <div style="height: 12px; background: hsl(240, 23%, 9%); border-radius: 4px;"></div>
+        <div style="display: grid; grid-template-columns: 200px 1fr 130px; gap: 12px; flex: 1;">
+          <div style="background: hsl(240, 21%, 15%); border-radius: 6px; min-height: 240px;"></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="height: 22px; width: 70%; background: hsl(237, 16%, 23%); border-radius: 4px;"></div>
+            <div style="height: 9px; background: hsl(240, 21%, 15%); border-radius: 3px;"></div>
+            <div style="height: 9px; background: hsl(240, 21%, 15%); border-radius: 3px;"></div>
+            <div style="height: 9px; width: 80%; background: hsl(240, 21%, 15%); border-radius: 3px;"></div>
+            <div style="height: 58px; background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 6px; margin: 4px 0;"></div>
+            <div style="height: 9px; background: hsl(240, 21%, 15%); border-radius: 3px;"></div>
+            <div style="height: 9px; width: 60%; background: hsl(240, 21%, 15%); border-radius: 3px;"></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><div style="height: 7px; background: hsl(240, 21%, 15%); border-radius: 3px;"></div><div style="height: 7px; width: 80%; background: hsl(240, 21%, 15%); border-radius: 3px;"></div><div style="height: 7px; width: 60%; background: hsl(240, 21%, 15%); border-radius: 3px;"></div></div>
+        </div>
+        <p style="margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: hsl(228, 24%, 72%);">Sidebar 200 / prose 720 max / on-page contents 130. The repo's <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">docs/*.md</span> are the source; the shell only has to host them.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">09</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Voice and rules</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(115, 54%, 76%);">Do</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 8px;">
+          <li>Write in the README's voice: precise, technical, reasons stated, tradeoffs named.</li>
+          <li>State mechanisms, not benefits — the FIFO, the NDJSON stream, the 5.4 MB dmg.</li>
+          <li>Say what the app declines to do and why.</li>
+          <li>Keep the mark's peach for one action per view.</li>
+        </ul>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsla(343, 81%, 75%, 0.35); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(343, 81%, 75%);">Never</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 8px;">
+          <li>Invent users, download counts, testimonials, press or benchmarks. None exist.</li>
+          <li>Imply a Homebrew tap, an Intel build, or a public source mirror.</li>
+          <li>Ship a light appearance without deciding it as a product question first.</li>
+          <li>Floating device art, perspective mockups, or a light hero — the identity is dark.</li>
+          <li>Gradients beyond the three approved in §10. No hue-shifting washes, no gradient text.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">10</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Gradient</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">three approved treatments — everything else stays flat</span>
+    </div>
+    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: hsl(228, 24%, 72%); max-width: 72ch;">Three treatments, approved 2026-08-15. All stay inside the existing ladder: no new hues, nothing above 10% alpha, and each still reads as a flat dark page at a glance. Anything not on this list is out. All three are live on this page: A as the ground, B behind the masthead, C on the §07 feature cards.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+
+      <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden; min-width: 0;">
+        <div style="height: 150px; background: linear-gradient(180deg, hsl(240, 21%, 12%) 0%, hsl(240, 23%, 9%) 100%); display: flex; align-items: flex-end; padding: 16px;">
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">mantle → crust, 180deg</span>
+        </div>
+        <div style="padding: 18px 20px; background: hsl(240, 21%, 15%); display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 15px; color: hsl(17, 63%, 61%);">A</span><span style="font-size: 17px; font-weight: 600;">Ground fade</span></div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">A 3% lightness drift down the page, mantle settling into crust. Existing tokens, no hue. Gives a long page a horizon without anyone naming it a gradient — and leaves the top light, where the hero bloom sits.</p>
+        </div>
+      </div>
+
+      <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden; min-width: 0;">
+        <div style="height: 150px; background: radial-gradient(60% 100% at 50% 0%, hsla(17, 63%, 61%, 0.10) 0%, transparent 70%), hsl(240, 21%, 12%); display: flex; align-items: center; justify-content: center; gap: 12px;">
+          <img src="ui/favicon.svg" alt="" style="width: 30px; height: 30px; display: block;" />
+          <span style="font-size: 20px; font-weight: 600;">term.hut</span>
+        </div>
+        <div style="padding: 18px 20px; background: hsl(240, 21%, 15%); display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 15px; color: hsl(17, 63%, 61%);">B</span><span style="font-size: 17px; font-weight: 600;">Hero bloom</span></div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Peach at 10%, radial from the top edge, behind the mark only. Once per site, on the home hero. The one place a gradient is doing real work: it puts light behind the logo.</p>
+        </div>
+      </div>
+
+      <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden; min-width: 0;">
+        <div style="height: 150px; background: hsl(240, 21%, 12%); display: flex; align-items: center; justify-content: center; padding: 20px;">
+          <div style="width: 100%; border-radius: 12px; padding: 1px; background: linear-gradient(160deg, hsl(231, 11%, 47%) 0%, hsl(234, 13%, 31%) 40%, hsl(237, 16%, 23%) 100%);">
+            <div style="background: hsl(240, 21%, 15%); border-radius: 11px; padding: 18px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(17, 63%, 61%);">01</span>
+              <span style="font-size: 15px; font-weight: 600;">Detached agents</span>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 18px 20px; background: hsl(240, 21%, 15%); display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 15px; color: hsl(17, 63%, 61%);">C</span><span style="font-size: 17px; font-weight: 600;">Card edge</span></div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">A 1px border that runs overlay0 → surface0 top-left to bottom-right, so a feature card catches a little light. Greys only. Replaces the flat hairline on cards, nowhere else.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border: 1px solid hsla(343, 81%, 75%, 0.35); border-radius: 12px; overflow: hidden; min-width: 0;">
+      <div style="height: 130px; background: linear-gradient(120deg, hsl(267, 84%, 45%) 0%, hsl(199, 76%, 45%) 50%, hsl(343, 81%, 50%) 100%); display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 30px; font-weight: 700; background: linear-gradient(90deg, hsl(23, 92%, 75%), hsl(267, 84%, 81%)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Ship faster with AI</span>
+      </div>
+      <div style="padding: 18px 20px; background: hsl(240, 21%, 15%); display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 15px; color: hsl(343, 81%, 75%);">✕</span><span style="font-size: 17px; font-weight: 600;">Vetoed, kept for reference</span></div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Hue-shifting washes and gradient text. Two hues that don't sit next to each other in the palette, at saturations the app never uses, carrying a claim the product doesn't make. This is the thing the original rule was written against.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">11</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Responsive</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">four breakpoints; the phone is the default, not the fallback</span>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Breakpoints</div>
+      <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">&ge; 1200</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Full system. 1120 content, 40 page pad, three-up cards, 12-col grid.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">1024 &ndash; 1199</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Same structure, fluid width, 32 page pad. Three-up survives; four-up does not exist.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">768 &ndash; 1023</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Two-up grids stay two-up; three-up becomes two-up with the third full width. Docs sidebar becomes a sticky select above the prose.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">&lt; 768</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Single column, 20 page pad, section rhythm 96 &rarr; 56. Nav collapses to a sheet. Screenshot frames go full-bleed edge to edge.</span></div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Mobile type scale</div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">display/xl</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">76 &rarr; 40 &middot; line-height 1.15</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">display/l</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">44 &rarr; 30</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">title/l</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">28 &rarr; 22</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">body/lead</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">19 &rarr; 17</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">body/base</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">16 &mdash; unchanged, ever</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">mono/base</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">14 &rarr; 13, and code blocks scroll rather than wrap</span></div>
+      </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Body copy never shrinks below 16. A developer reading a docs page on a phone is the one visitor most likely to be reading every word.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Mobile shell &middot; 360px</div>
+        <div style="width: 320px; max-width: 100%; border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden; background: hsl(240, 21%, 12%);">
+          <div style="display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 16px; background: hsl(240, 23%, 9%); border-bottom: 1px solid hsl(234, 13%, 31%);">
+            <img src="ui/favicon.svg" alt="" style="width: 22px; height: 22px; display: block;" />
+            <span style="font-size: 15px; font-weight: 600;">term.hut</span>
+            <span style="margin-left: auto; display: flex; flex-direction: column; gap: 4px; width: 20px;"><span style="height: 2px; background: hsl(226, 64%, 88%);"></span><span style="height: 2px; background: hsl(226, 64%, 88%);"></span></span>
+          </div>
+          <div style="padding: 20px 16px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em;">Detached agents</div>
+            <div style="font-size: 16px; line-height: 1.6; color: hsl(227, 35%, 80%);">Sessions outlive the app.</div>
+            <div style="height: 48px; border-radius: 8px; background: hsl(17, 63%, 61%); color: hsl(240, 23%, 9%); font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center;">Download for macOS</div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Two-line hamburger, not three. The sheet it opens is full height, crust ground, one nav item per 52px row.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">12</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Interactive states</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">hover these &mdash; every sample below is live</span>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Buttons and links</div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px;">
+        <button style="height: 48px; padding: 0 22px; border: 0; border-radius: 8px; background: hsl(17, 63%, 61%); color: hsl(240, 23%, 9%); font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;" style-hover="background: hsl(23, 92%, 75%);" style-active="background: hsl(17, 63%, 52%); transform: translateY(1px);">Primary</button>
+        <button style="height: 48px; padding: 0 22px; border: 1px solid hsl(231, 11%, 47%); border-radius: 8px; background: transparent; color: hsl(226, 64%, 88%); font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;" style-hover="background: hsl(237, 16%, 23%); border-color: hsl(228, 17%, 64%);" style-active="background: hsl(240, 23%, 9%);">Secondary</button>
+        <button style="height: 44px; padding: 0 14px; border: 0; border-radius: 8px; background: transparent; color: hsl(227, 35%, 80%); font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; cursor: pointer;" style-hover="color: hsl(17, 63%, 61%);" style-active="color: hsl(23, 92%, 75%);">Ghost</button>
+        <a href="#12" style="font-size: 15px;">Inline link</a>
+        <span style="font-size: 15px; color: hsl(228, 17%, 64%);">Visited: unchanged. No purple, ever &mdash; docs get revisited constantly.</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">hover</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">One step lighter on the same hue (peach &rarr; ctp-peach). 120ms.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">active</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">One step darker plus 1px translateY. No scale.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">focus-visible</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">The element&rsquo;s own border thickens to 2px and turns mauve. No offset ring outside it &mdash; one line at a time, never a border and an outline together.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">disabled</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Hairline border, overlay0 text, cursor not-allowed. Never a filled disabled button.</span></div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Focus ring</div>
+        <div style="display: flex; gap: 14px; align-items: center; padding: 6px;">
+          <span style="height: 44px; padding: 0 18px; border-radius: 8px; background: transparent; border: 2px solid hsl(267, 84%, 81%); color: hsl(226, 64%, 88%); font-size: 15px; display: flex; align-items: center;">Focused</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); line-height: 1.7;">:focus-visible only<br />one line, never two</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">This deviates from the app on purpose. The app paints a 2px mauve outline at 2px offset, which on a bordered control shows as two concentric lines; on the site the border itself becomes the indicator. Borderless targets &mdash; nav items, docs rows, the mark &mdash; get the offset outline instead, since they have no edge to promote.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Text input</div>
+        <input type="text" placeholder="Search the docs" style="height: 44px; padding: 0 12px; border: 1px solid hsl(231, 11%, 47%); border-radius: 8px; background: hsl(240, 23%, 9%); color: hsl(226, 64%, 88%); font-family: inherit; font-size: 15px; outline: none;" style-focus="border-color: hsl(267, 84%, 81%);" />
+        <input type="text" value="not-a-version" style="height: 44px; padding: 0 12px; border: 1px solid hsl(343, 81%, 75%); border-radius: 8px; background: hsl(240, 23%, 9%); color: hsl(226, 64%, 88%); font-family: inherit; font-size: 15px; outline: none;" />
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Crust fill so a field reads as a well, not a card. Border goes mauve on focus, red on invalid. Placeholder is overlay2, never a fake value.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">13</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Docs prose</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">the repo&rsquo;s docs/*.md, rendered</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: start;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Prose specimen &middot; 720 max</div>
+        <h3 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 10px;">Detached agents<span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 14px; color: hsl(231, 11%, 47%);">#</span></h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7; color: hsl(227, 35%, 80%);">A session is not a child process. It runs behind a FIFO in <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 14px; padding: 2px 5px; border-radius: 5px; background: hsl(23, 45%, 14%); color: hsl(23, 92%, 75%);">~/.term-hut/agents/&lt;id&gt;/</span> on whichever host owns it.</p>
+        <h4 style="margin: 6px 0 0; font-size: 18px; font-weight: 600;">Attach and detach</h4>
+        <ol style="margin: 0; padding-left: 22px; font-size: 16px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 4px;">
+          <li>Closing the window detaches. The stream keeps appending.</li>
+          <li>Reopening re-attaches, replays, then follows.</li>
+        </ol>
+        <blockquote style="margin: 0; padding: 4px 0 4px 16px; border-left: 2px solid hsl(17, 63%, 61%); font-size: 16px; line-height: 1.7; color: hsl(228, 24%, 72%);">The app is a viewer, not the owner.</blockquote>
+        <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 8px; overflow: hidden;">
+          <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px;">
+            <div style="padding: 9px 12px; background: hsl(240, 23%, 9%); color: hsl(228, 17%, 64%);">event</div>
+            <div style="padding: 9px 12px; background: hsl(240, 23%, 9%); color: hsl(228, 17%, 64%);">source</div>
+            <div style="padding: 9px 12px; background: hsl(240, 23%, 9%); color: hsl(228, 17%, 64%);">payload</div>
+            <div style="padding: 9px 12px; color: hsl(226, 64%, 88%);">claude://message</div>
+            <div style="padding: 9px 12px; color: hsl(227, 35%, 80%);">claude.rs</div>
+            <div style="padding: 9px 12px; color: hsl(227, 35%, 80%);">NDJSON line</div>
+            <div style="padding: 9px 12px; background: hsla(240, 21%, 50%, 0.05); color: hsl(226, 64%, 88%);">pty://output</div>
+            <div style="padding: 9px 12px; background: hsla(240, 21%, 50%, 0.05); color: hsl(227, 35%, 80%);">main.rs</div>
+            <div style="padding: 9px 12px; background: hsla(240, 21%, 50%, 0.05); color: hsl(227, 35%, 80%);">raw bytes</div>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; line-height: 1.6; color: hsl(228, 17%, 64%);">Zebra rows use the app&rsquo;s own --row-stripe. Headings carry a hover-revealed anchor. Tables never get vertical rules.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Syntax token map &middot; from editor.js</div>
+        <div style="background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 8px; padding: 14px; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; line-height: 1.7; overflow-x: auto; min-width: 0;">
+          <div><span style="color: hsl(231, 11%, 47%);">// spawn the CLI, keep stdin open</span></div>
+          <div><span style="color: hsl(267, 84%, 81%);">pub async fn</span> <span style="color: hsl(217, 92%, 76%);">attach</span><span style="color: hsl(228, 17%, 64%);">(</span><span style="color: hsl(226, 64%, 88%);">id</span><span style="color: hsl(189, 71%, 73%);">:</span> <span style="color: hsl(41, 86%, 83%);">AgentId</span><span style="color: hsl(228, 17%, 64%);">)</span> <span style="color: hsl(189, 71%, 73%);">-&gt;</span> <span style="color: hsl(41, 86%, 83%);">Result</span><span style="color: hsl(228, 17%, 64%);">&lt;</span><span style="color: hsl(41, 86%, 83%);">Stream</span><span style="color: hsl(228, 17%, 64%);">&gt; {</span></div>
+          <div>&nbsp; <span style="color: hsl(267, 84%, 81%);">let</span> <span style="color: hsl(226, 64%, 88%);">path</span> <span style="color: hsl(189, 71%, 73%);">=</span> <span style="color: hsl(115, 54%, 76%);">"out.ndjson"</span><span style="color: hsl(228, 17%, 64%);">;</span></div>
+          <div>&nbsp; <span style="color: hsl(267, 84%, 81%);">let</span> <span style="color: hsl(226, 64%, 88%);">from</span> <span style="color: hsl(189, 71%, 73%);">=</span> <span style="color: hsl(23, 92%, 75%);">0</span><span style="color: hsl(228, 17%, 64%);">;</span></div>
+          <div><span style="color: hsl(228, 17%, 64%);">}</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(267, 84%, 81%); flex: none; width: 130px;">keyword</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-kw</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">mauve &mdash; also modifier, controlKeyword</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(217, 92%, 76%); flex: none; width: 130px;">function</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-fn</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">blue &mdash; also propertyName, labelName</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(41, 86%, 83%); flex: none; width: 130px;">typeName</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-type</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">yellow &mdash; also className, attributeName</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(115, 54%, 76%); flex: none; width: 130px;">string</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-str</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">green &mdash; also regexp, attributeValue</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(23, 92%, 75%); flex: none; width: 130px;">number</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-num</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">peach &mdash; also bool, atom, constant</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(189, 71%, 73%); flex: none; width: 130px;">operator</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-op</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">sky</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(228, 17%, 64%); flex: none; width: 130px;">punctuation</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-punct</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">overlay2 &mdash; also meta</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(231, 11%, 47%); flex: none; width: 130px;">comment</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-cmt</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">overlay0, italic in the editor</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(343, 81%, 75%); flex: none; width: 130px;">tagName</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-tag</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">red &mdash; also invalid</span>
+      </div>
+      <div style="display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(316, 72%, 86%); flex: none; width: 130px;">escape</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%); flex: none; width: 78px;">hl-esc</span>
+        <span style="font-size: 13px; color: hsl(227, 35%, 80%); min-width: 0;">pink</span>
+      </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; line-height: 1.6; color: hsl(228, 17%, 64%);">Same class names the chat panel emits (codeBlocks.js), so a snippet copied out of the app lands on the site already styled.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">14</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Motion</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">the app runs three perpetual loops; the site runs none</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Durations and easing</div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">120ms</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Color and border on hover. The default; if in doubt, this.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">180ms</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Disclosure &mdash; changelog detail, docs section, copy acknowledgment.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">240ms</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">The mobile nav sheet, and nothing else.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">cubic-bezier(.2 0 .2 1)</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Everything. One curve for the whole site.</span></div>
+      <div style="display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); flex: none; width: 190px;">no delay</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Nothing waits before it starts. Staggered reveals are scroll animation in disguise.</span></div>
+        </div>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">What may move</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 6px;">
+          <li>Color, border-color, opacity, and the 1px active translate.</li>
+          <li>Height on a disclosure the user opened.</li>
+          <li>The one spinner on the release-feed fetch &mdash; it is the only thing saying a request is in flight.</li>
+        </ul>
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); color: hsl(343, 81%, 75%);">What never moves</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 6px;">
+          <li>Anything triggered by scroll position: entrances, parallax, counters, pinning.</li>
+          <li>Page transitions. A link navigates.</li>
+          <li>Autoplaying video or looping product animation.</li>
+        </ul>
+      </div>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Reduced motion &mdash; inherited from index.html</div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%);">Under <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">prefers-reduced-motion: reduce</span> the site collapses every duration to 0.01ms and every iteration count to 1, exempting the in-flight spinner &mdash; a frozen spinner reads as a hang, which is worse than the motion. That is the app&rsquo;s policy verbatim; the site does not get a second opinion on it.</p>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">15</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Contrast</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">measured on the shipped hsl values, WCAG 2.1</span>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Text pairs</div>
+      <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">ink on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">11.34</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AAA</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">ink on page</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">12.14</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AAA</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">ink-muted on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">9.26</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AAA &mdash; body copy</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">subtext0 on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">7.37</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AAA</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">ink-dim (overlay2) on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">5.88</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AA &mdash; label color, after the fix below</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">overlay1 on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">4.33</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); min-width: 0;">FAILS AA for text &mdash; decoration only</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">peach on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">5.64</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AA &mdash; links, section numbers</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">peach on well</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">6.40</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AA &mdash; code-block prompt sigil</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">well on peach fill</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">6.40</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AA &mdash; primary button label</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">mauve on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">8.05</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AAA &mdash; focus ring</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">green / yellow / teal on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">11.0 / 12.8 / 10.9</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AAA &mdash; badges</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">red / blue on card</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">7.13 / 7.85</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">AAA &mdash; badges, callouts</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">hairline on card (non-text)</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">1.80</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(41, 86%, 83%); min-width: 0;">under 3:1 by design &mdash; card edges only</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(227, 35%, 80%); flex: none; width: 250px;">border-strong on card (control)</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 68px; font-variant-numeric: tabular-nums;">3.31</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(115, 54%, 76%); min-width: 0;">clears the 3:1 UI floor &mdash; inputs, buttons</span>
+      </div>
+      </div>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsla(41, 86%, 83%, 0.35); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); color: hsl(41, 86%, 83%);">One finding, applied</div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%);">The original label color, ctp-overlay1, measures 4.33:1 on a card. Every eyebrow label and spec annotation here is 11px, which needs 4.5:1 &mdash; so it failed. <span style="color: hsl(226, 64%, 88%);">--ink-dim is now ctp-overlay2, hsl(228 17% 64%), at 5.88:1</span>, applied across this page. Overlay1 is demoted to decoration: comment text in a code block, 1px marks, disabled labels. The app keeps overlay1 for its own labels because they sit at a different size on a different ground; the site does not inherit that one.</p>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">16</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Edge cases</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">three pages nobody designs until they are needed</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">404</div>
+        <div style="background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-height: 150px;">
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(228, 17%, 64%);">$ cd /that-page</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(343, 81%, 75%);">no such file or directory</span>
+          <span style="margin-top: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(17, 63%, 61%);">cd / &nbsp;&middot;&nbsp; docs &nbsp;&middot;&nbsp; changelog</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">A shell error, because this audience has heard the joke and still finds it correct. Three real links, no illustration.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Empty changelog</div>
+        <div style="background: hsl(240, 23%, 9%); border: 1px dashed hsl(231, 11%, 47%); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 8px; min-height: 150px; justify-content: center;">
+          <span style="font-size: 15px; color: hsl(226, 64%, 88%);">No releases yet.</span>
+          <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">The feed reads the releases repo directly, so this page fills itself the moment a dmg is published.</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Dashed border marks a state, not a card. Same treatment for a fetch failure, with the reason named.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Unsupported platform</div>
+        <div style="background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-height: 150px;">
+          <span style="font-size: 15px; color: hsl(226, 64%, 88%);">macOS 12+ on Apple silicon only.</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%); line-height: 1.7;">aarch64 &middot; signed &amp; notarized<br />no Intel build &middot; no Windows &middot; no Linux</span>
+          <span style="margin-top: auto; height: 40px; border: 1px solid hsl(234, 13%, 31%); border-radius: 8px; color: hsl(231, 11%, 47%); font-size: 14px; display: flex; align-items: center; justify-content: center;">Download unavailable</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Detect, state the requirement, disable the button. Never offer a build that does not exist, and never imply one is coming.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">17</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Brand assets</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">four files already in the repo &mdash; no new ones</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">favicon.svg</div>
+        <div style="background: hsl(240, 23%, 9%); border-radius: 10px; padding: 24px; display: flex; align-items: center; justify-content: center; gap: 20px;">
+          <img src="ui/favicon.svg" alt="term.hut mark" style="width: 56px; height: 56px; display: block;" />
+          <img src="ui/favicon.svg" alt="" style="width: 24px; height: 24px; display: block;" />
+          <img src="ui/favicon.svg" alt="" style="width: 16px; height: 16px; display: block;" />
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">The rounded tile. Browser tab, site header, footer, anywhere the mark appears on a page. It carries its own dark ground, so it never needs a container. Minimum 16px.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">icon-full.svg</div>
+        <div style="background: hsl(240, 23%, 9%); border-radius: 10px; padding: 24px; display: flex; align-items: center; justify-content: center; gap: 18px;">
+          <img src="ui/icons/icon-full.svg" alt="maskable icon" style="width: 56px; height: 56px; display: block; border-radius: 12px;" />
+          <img src="ui/icons/icon-full.svg" alt="" style="width: 56px; height: 56px; display: block; border-radius: 999px;" />
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Full-bleed, for anything that clips its own silhouette: web-app manifest, apple-touch-icon, Android launcher. Never used on a page &mdash; square corners on a light ground look like a mistake.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">og.png &middot; 1200&times;630</div>
+        <div style="background: hsl(240, 23%, 9%); border-radius: 10px; padding: 16px; display: flex; align-items: center; justify-content: center;">
+          <span style="width: 100%; max-width: 260px; aspect-ratio: 1200 / 630; border-radius: 6px; overflow: hidden; display: block;"><img src="ui/icons/og.svg" alt="link preview card" style="width: 100%; height: 100%; object-fit: cover; display: block;" /></span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">One card for the whole site, on every page. Per-page OG images are a maintenance tax with no payoff at this size. The shipped PNG is the asset; the SVG is only its source.</p>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Clear space and scale</div>
+        <div style="background: hsl(240, 23%, 9%); border-radius: 10px; padding: 20px; display: flex; align-items: center; justify-content: center;">
+          <div style="border: 1px dashed hsl(231, 11%, 47%); padding: 16px; display: flex;">
+            <img src="ui/favicon.svg" alt="" style="width: 64px; height: 64px; display: block;" />
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Clear space equals a quarter of the tile on every side. Lock the mark to the type baseline in the header at 24px; 44px in the footer.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsla(343, 81%, 75%, 0.35); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); color: hsl(343, 81%, 75%);">Never</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 6px;">
+          <li>Recolor the glyph or the tile. The peach is the mark.</li>
+          <li>Put the tile on a peach or light ground.</li>
+          <li>Redraw the prompt, add a wordmark inside the tile, or set the name in anything but the UI stack.</li>
+          <li>Write it Term.hut, TermHut, or term.hut&trade;. Lowercase, with the dot, always.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">18</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Metadata and URLs</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">termhut.hutsonlabs.com</span>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+      <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Routes</div>
+      <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">/</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Home. The claim, the download, one screenshot, three mechanisms.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">/features</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Features. One section per mechanism, screenshot per section.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">/docs</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Docs index. Sidebar IA mirrors the repo&rsquo;s docs/ order, concepts before protocol notes.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">/docs/&lt;slug&gt;</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">One page per docs/*.md. Slug is the filename: /docs/detached-agents.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">/changelog</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Read from the releases feed. No hand-written entries.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">/legal/license &middot; /legal/privacy</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Two flat pages. No index above them.</span></div>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Lowercase, hyphenated, no trailing slash, no file extensions. A docs URL must survive the markdown file being renamed &mdash; if a slug changes, it redirects.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Title and description</div>
+        <div style="background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 8px; padding: 16px; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; line-height: 1.8; color: hsl(227, 35%, 80%); overflow-x: auto;">
+          <div><span style="color: hsl(228, 17%, 64%);">&lt;title&gt;</span>term.hut &mdash; a local, agent-aware terminal<span style="color: hsl(228, 17%, 64%);">&lt;/title&gt;</span></div>
+          <div><span style="color: hsl(228, 17%, 64%);">&lt;title&gt;</span>Detached agents &middot; term.hut docs<span style="color: hsl(228, 17%, 64%);">&lt;/title&gt;</span></div>
+          <div style="margin-top: 8px; color: hsl(228, 17%, 64%);">&lt;meta name="description"&gt; &mdash; one sentence, states a mechanism</div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Home is name then em dash then the tagline from og.svg, verbatim. Every other page is page name, middot, term.hut docs. Under 60 characters. No keyword stuffing, no pipe-separated tails.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Head block, every page</div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">canonical</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Absolute, https, no query. One canonical host &mdash; www redirects.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">og:image</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">/icons/og.png, 1200&times;630, with og:image:alt.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">twitter:card</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">summary_large_image. Same PNG.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">theme-color</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">hsl(240 21% 12%) &mdash; the page ground, so mobile chrome matches.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">color-scheme</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">dark. The site is dark-only; say so in the head, not just in CSS.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">icons</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">favicon.svg, then icon-192 / icon-512 / maskable-512 in the manifest.</span></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">19</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Delivery budget</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">the dmg is 5.4 MB; the homepage must not embarrass it</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Ceilings</div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Home, first load</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">&le; 400 KB total, images included.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Docs page</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">&le; 150 KB after the font is cached.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Webfonts</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">One family, three weights, woff2, latin subset. Maple Mono only.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">JavaScript</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">&le; 15 KB, and the site works without it. No framework, no hydration.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Screenshots</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">AVIF or WebP, &le; 200 KB each, width-capped at 2x the layout slot.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Requests</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Under 20 on any page.</span></div>
+      </div>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">How that is met</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%); display: flex; flex-direction: column; gap: 7px;">
+          <li>Static HTML, hand-written or generated at build. Nothing renders client-side.</li>
+          <li>Icons inline as SVG &mdash; no sprite request, no icon font.</li>
+          <li>One stylesheet. No CSS framework, no utility layer shipped unused.</li>
+          <li>JS is only ever progressive: the copy button, the mobile sheet, the releases fetch. Every one degrades to something that still works.</li>
+          <li>No third-party embeds. Nothing loads from a domain that is not ours.</li>
+        </ul>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 17%, 64%);">Same principle as the app: weight is a feature, and every addition is measured against it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">20</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Print</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">docs get printed and pasted into tickets &mdash; so they invert</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; align-items: start;">
+      <div style="border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; overflow: hidden; min-width: 0;">
+        <div style="background: hsl(45, 12%, 97%); padding: 24px; display: flex; flex-direction: column; gap: 12px; font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;">
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(240, 6%, 45%);">term.hut docs &middot; termhut.hutsonlabs.com/docs/detached-agents</div>
+          <div style="font-size: 20px; font-weight: 600; color: hsl(240, 10%, 12%);">Detached agents</div>
+          <div style="font-size: 12px; line-height: 1.6; color: hsl(240, 8%, 25%);">A session is not a child process. It runs behind a FIFO in <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(240, 10%, 12%);">~/.term-hut/agents/&lt;id&gt;/</span> on whichever host owns it.</div>
+          <div style="border: 1px solid hsl(240, 8%, 82%); border-radius: 4px; padding: 10px; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; line-height: 1.6; color: hsl(240, 10%, 12%); background: hsl(45, 14%, 94%);">$ hut open ~/src/term.hut</div>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 10px; color: hsl(240, 6%, 45%);">retrieved 2026-08-15 &middot; page 1 of 3</div>
+        </div>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Rules</div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Ground</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Inverts to warm white. Dark-only is a screen decision; a printer does not have a dark mode.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Ink</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Near-black at 12%L, muted at 25%L. Syntax color drops entirely &mdash; code prints black on a hairline box.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Dropped</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Nav, footer, download buttons, screenshots of the app, every gradient.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Kept</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Prose, code, tables, and the callouts &mdash; the parts someone is printing it for.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Added</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Source URL and retrieval date in the running head, page numbers in the foot.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Type</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">11pt body, 10pt mono. Points, not pixels.</span></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">21</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Accessibility</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">beyond the contrast numbers in &sect;15</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Structure</div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Skip link</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">First focusable element on every page. Visually hidden until focused, then a peach pill at top left.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Landmarks</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">header / nav / main / footer, one each. Docs adds aside for the sidebar.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Headings</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">One h1 per page, no level skipped. The eyebrow label is not a heading.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Tab order</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Source order. No tabindex above 0, anywhere.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Targets</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">44px minimum, including the mobile nav rows and the copy button.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Live region</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">One polite sr-only region per page, the app&rsquo;s pattern &mdash; it speaks &ldquo;copied&rdquo; when the copy button fires.</span></div>
+      </div>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Alt text for app screenshots</div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%);">Describe what the window is doing, not what it contains. A terminal screenshot read letter by letter is noise.</p>
+        <div style="background: hsl(240, 23%, 9%); border: 1px solid hsla(115, 54%, 76%, 0.3); border-radius: 8px; padding: 14px; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(115, 54%, 76%);">good</span><br />term.hut split view: a shell on the left, the Claude panel on the right mid-turn, both anchored to the same repo.</div>
+        <div style="background: hsl(240, 23%, 9%); border: 1px solid hsla(343, 81%, 75%, 0.3); border-radius: 8px; padding: 14px; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(343, 81%, 75%);">bad</span><br />Screenshot of term.hut. / A dark terminal window with code in it. / $ cargo build &mdash;release Compiling term-hut v0.9.4&hellip;</div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 17%, 64%);">Decorative marks and the icons beside a label get alt="". The mark in the header is the site name, so it gets the name.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">22</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Privacy and legal</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">no data collected &mdash; which is worth saying plainly</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Privacy page &middot; the whole page</div>
+        <div style="background: hsl(240, 23%, 9%); border: 1px solid hsl(234, 13%, 31%); border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="font-size: 22px; font-weight: 600;">Privacy</div>
+          <div style="font-size: 16px; line-height: 1.7; color: hsl(227, 35%, 80%);">This site collects nothing. No analytics, no cookies, no third-party scripts, no server logs kept beyond what the host needs to serve a file.</div>
+          <div style="font-size: 16px; line-height: 1.7; color: hsl(227, 35%, 80%);">The app is the same. term.hut talks to your machine, your hosts over your own SSH, and the Claude Code CLI you already installed &mdash; using your credentials, which it never sees. Nothing is sent to us, because there is no us to send it to.</div>
+          <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Downloads are served by GitHub Releases, which keeps its own logs.</div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">Four sentences, no headings, no legalese scaffolding. For this audience the credibility is in the brevity &mdash; a two-thousand-word privacy policy is itself a claim, and not a good one. The one honest caveat (GitHub&rsquo;s logs) is stated rather than buried.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%);">Standing calls</div>
+        <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Analytics</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">None. Decided. Any future measurement changes this page first.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Cookies</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">None, so no banner. A cookie banner on a site with no cookies is a tell.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Fonts</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Self-hosted. A font CDN is a third party that sees every visitor.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">Releases</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">GitHub. Named on the privacy page rather than treated as invisible.</span></div>
+      <div style="display: flex; flex-direction: column; gap: 3px; padding: 9px 0; border-bottom: 1px solid hsl(234, 13%, 31%); font-size: 14px;"><span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(228, 17%, 64%);">License</span><span style="color: hsl(227, 35%, 80%); min-width: 0;">Placeholder: proprietary, free to download, no source. Source is private and the releases repo is assets-only, so that is what is true today &mdash; confirm before it ships.</span></div>
+      </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(228, 17%, 64%);">The vendored dependencies carry their own licenses (xterm.js, CodeMirror, Rough.js, perfect-freehand, Catppuccin icons, Maple Mono under OFL). The license page lists them; the app already vendors each with a README naming its version.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid hsl(234, 13%, 31%); padding-bottom: 12px;">
+      <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(17, 63%, 61%);">23</span>
+      <h2 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em;">Vocabulary</h2>
+      <span style="margin-left: auto; font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; color: hsl(228, 17%, 64%);">the words a second writer gets wrong</span>
+    </div>
+    <div style="background: hsl(240, 21%, 15%); border: 1px solid hsl(234, 13%, 31%); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+      <div style="display: flex; gap: 16px; align-items: baseline; padding-bottom: 6px;">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); flex: none; width: 168px;">Use</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); flex: none; width: 210px;">Not</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); min-width: 0;">Why</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">term.hut</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">Term.hut, TermHut, term.hut&trade;</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">Lowercase, with the dot, even at the start of a sentence.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">a workspace</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">an IDE, an editor, a terminal app</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">The product noun. It is a terminal first, but what you get is a workspace.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">project</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">anchor, anchored directory, folder</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">The repo bound to its session, terminal, editor and branch.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">persistent</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">detached, background, long-running</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">Sessions that outlive the window. &ldquo;Persistent&rdquo; is the promise; &ldquo;background&rdquo; implies lesser.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">agent</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">assistant, bot, copilot, the AI</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">The running thing doing work.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">Claude</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">the model, the LLM</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">Name it directly. It is the Claude Code CLI you already installed.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">session</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">conversation, thread, chat</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">The transcript and its state &mdash; not the actor. The agent has a session.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">pane</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">panel, window, tab</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">Terminal, editor and Claude are panes in one window.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">remote / over SSH</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">cloud, hosted, server mode</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">A remote project is not a lesser mode, and nothing here is hosted.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">you</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">the user, developers, one</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">Second person throughout. The reader is the person at the terminal.</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid hsl(234, 13%, 31%);">
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px; color: hsl(226, 64%, 88%); flex: none; width: 168px;">we</span>
+        <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; color: hsl(343, 81%, 75%); flex: none; width: 210px;">HutsonLabs (as a subject), the team</span>
+        <span style="font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%); min-width: 0;">First person plural for decisions and intent. Sparingly &mdash; mechanisms rarely need an author.</span>
+      </div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsla(343, 81%, 75%, 0.35); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); color: hsl(343, 81%, 75%);">Never write</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">seamless</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">powerful</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">supercharge</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">effortless</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">AI-powered</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">revolutionary</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">blazing fast</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">game-changing</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">unleash</span>
+          <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: hsla(343, 81%, 75%, 0.1); border: 1px solid hsla(343, 81%, 75%, 0.3); color: hsl(227, 35%, 80%); text-decoration: line-through;">simply</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: hsl(227, 35%, 80%);">If a sentence needs one of these to work, the sentence has no mechanism in it. Replace the adjective with the thing that makes it true.</p>
+      </div>
+      <div style="background: hsl(240, 21%, 15%); border: 1px solid hsla(41, 86%, 83%, 0.35); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0;">
+        <div style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(228, 17%, 64%); color: hsl(41, 86%, 83%);">Collision with the repo</div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%);">Two of these overrule the code. The repo says <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">anchored workspaces</span> and <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">detached agents</span> &mdash; in <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">README.md</span>, <span style="font-family: 'Maple Mono', 'SF Mono', Menlo, monospace; font-size: 13px;">PRODUCT.md</span>, two docs filenames, and the UI&rsquo;s own strings.</p>
+        <p style="margin: 0; font-size: 15px; line-height: 1.7; color: hsl(227, 35%, 80%);">Since &sect;18 derives docs slugs from those filenames, the site would read &ldquo;project&rdquo; and &ldquo;persistent&rdquo; while its URLs and the app both say otherwise. Pick one: rename in the repo (docs filenames, with redirects), or keep the repo&rsquo;s words as the technical terms and use yours only in marketing copy.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</div>
+</x-dc>
+</body>
+</html>
